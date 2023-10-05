@@ -6,14 +6,53 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainController: UIViewController {
+    private var handler: AuthStateDidChangeListenerHandle?
+    var currentUserId: String = ""
+    var isSignedIn: Bool {
+        return Auth.auth().currentUser != nil
+    }
+    private var tabBar: TabBarController!
+    private var loginController: LoginController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        
+        fetchCurrentUser()
+        checkScene()
+    }
+    
+    private func fetchCurrentUser() {
+        handler = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.currentUserId = user?.uid ?? ""
+            }
+        })
     }
 
+    private func checkScene() {
+        if isSignedIn {
+            tabBar = TabBarController()
+            tabBar.modalPresentationStyle = .fullScreen
+            DispatchQueue.main.async {
+                self.present(self.tabBar, animated: false)
+            }
+        } else {
+            if ProcessInfo().arguments.contains("-ui-testing") {
+                
+            } else {
+                loginController = LoginController()
+                loginController.modalPresentationStyle = .fullScreen
+                DispatchQueue.main.async {
+                    self.present(self.loginController, animated: false)
+                }
+            }
+        }
+    }
 
 }
 
+extension MainController: MainProtocol {}

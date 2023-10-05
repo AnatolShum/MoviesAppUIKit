@@ -12,7 +12,7 @@ extension Network {
     enum Types {
         
         enum Response {
-            struct MovieObject: Codable {
+            struct MovieObject: Codable, Hashable {
                 let title: String?
                 let id: Int?
                 let backdrop: String?
@@ -32,15 +32,15 @@ extension Network {
                 }
             }
             
-            struct MovieResults: Codable {
+            struct MovieResults: Codable, Hashable {
                 let results: [Movie]
             }
             
-            struct Backdrops: Codable {
+            struct Backdrops: Codable, Hashable {
                 let backdrops: [Photos]
             }
             
-            struct VideoResults: Codable {
+            struct VideoResults: Codable, Hashable {
                 let results: [Videos]
             }
         }

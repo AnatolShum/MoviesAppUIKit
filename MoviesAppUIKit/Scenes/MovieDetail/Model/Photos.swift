@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Photos: Codable, Identifiable, Equatable {
+struct Photos: Codable, Identifiable, Equatable, Hashable {
     let path: String?
     var id: String? {
         path
