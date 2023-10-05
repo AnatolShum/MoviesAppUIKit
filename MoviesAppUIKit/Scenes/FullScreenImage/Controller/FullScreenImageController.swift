@@ -18,9 +18,6 @@ class FullScreenImageController: UIViewController {
     }
     
     var overlayView: UIView!
-    var initialCenter: CGPoint?
-    var windowImageView: UIImageView?
-    var startRect = CGRect.zero
     
     init(paths: [Photos], path: String? = nil) {
         self.paths = paths
