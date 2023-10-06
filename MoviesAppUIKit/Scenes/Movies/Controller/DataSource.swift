@@ -16,19 +16,19 @@ extension MoviesController {
             case .nowPlaying:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
                 
-                cell.configureCell(title: item.nowPlaying?.title, releaseDate: self.formattedDate(item.nowPlaying?.releaseDate), vote: item.nowPlaying?.vote, poster: item.nowPlaying?.poster)
+                cell.configureCell(title: item.nowPlaying?.title, releaseDate: item.nowPlaying?.releaseDate, vote: item.nowPlaying?.vote, poster: item.nowPlaying?.poster)
                 
                 return cell
             case .topRated:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
                 
-                cell.configureCell(title: item.topRated?.title, releaseDate: self.formattedDate(item.topRated?.releaseDate), vote: item.topRated?.vote, poster: item.topRated?.poster)
+                cell.configureCell(title: item.topRated?.title, releaseDate: item.topRated?.releaseDate, vote: item.topRated?.vote, poster: item.topRated?.poster)
   
                 return cell
             case .popular:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
                 
-                cell.configureCell(title: item.popular?.title, releaseDate: self.formattedDate(item.popular?.releaseDate), vote: item.popular?.vote, poster: item.popular?.poster)
+                cell.configureCell(title: item.popular?.title, releaseDate: item.popular?.releaseDate, vote: item.popular?.vote, poster: item.popular?.poster)
            
                 return cell
             }

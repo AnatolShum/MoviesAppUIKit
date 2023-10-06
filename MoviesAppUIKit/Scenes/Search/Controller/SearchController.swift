@@ -9,73 +9,46 @@ import UIKit
 
 class SearchController: UICollectionViewController {
     let colorView = ColorView()
+    let searchController = UISearchController()
     
-    override func loadView() {
-        super.loadView()
-        
-        view = colorView
+    var movies: [Movie] = []
+    var sections = [Section]()
+    var dataSource: UICollectionViewDiffableDataSource<Section, Movie>!
+    var snapshot: NSDiffableDataSourceSnapshot<Section, Movie> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movies)
+        return snapshot
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      title = "Search"
+        
+        title = "Search"
+        
+        navigationItem.searchController = searchController
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        collectionView.backgroundView = colorView
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifier)
+        
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+        configureDataSource()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        colorView.gradientLayer.frame = view.bounds
+        colorView.gradientLayer.frame = colorView.bounds
+        DispatchQueue.main.async {
+            self.collectionView.setCollectionViewLayout(self.createLayout(), animated: false)
+        }
     }
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchController.searchBar.resignFirstResponder()
     }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }

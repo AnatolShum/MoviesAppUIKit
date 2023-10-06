@@ -93,7 +93,7 @@ class MovieCell: UICollectionViewCell {
     
     func configureCell(title: String?, releaseDate: String?, vote: Double?, poster: String?) {
         titleLabel.text = title
-        releaseDateLabel.text = releaseDate
+        releaseDateLabel.text = formattedDate(releaseDate)
         circleProgressView.progressAnimation(vote)
         circleProgressView.voteLabel.text = formattedString(vote ?? 0)
         fetchImage(poster)
@@ -101,6 +101,15 @@ class MovieCell: UICollectionViewCell {
     
     private func formattedString(_ vote: Double) -> String {
         return String(format: "%.1f", vote)
+    }
+    
+    private func formattedDate(_ date: String?) -> String {
+        guard let inputDate = date else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: inputDate) else { return "" }
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        return dateFormatter.string(from: date)
     }
     
     private func fetchImage(_ poster: String?) {
