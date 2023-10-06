@@ -44,7 +44,8 @@ extension LoginController {
         createAccountButton.translatesAutoresizingMaskIntoConstraints = false
         createAccountButton.addTarget(self, action: #selector(createAccountTapped), for: .touchUpInside)
         
-        let stackView = UIStackView(arrangedSubviews: [emailTextField, LineView(), passwordTextField, LineView(), forgotButton, LineView()])
+        let lineViews = makeLineViews([emailTextField, passwordTextField, forgotButton])
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, lineViews[0], passwordTextField, lineViews[1], forgotButton, lineViews[2]])
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .equalSpacing
@@ -69,8 +70,25 @@ extension LoginController {
             loginButton.rightAnchor.constraint(equalTo: loginView.rightAnchor, constant: -30),
             loginButton.bottomAnchor.constraint(equalTo: loginView.bottomAnchor, constant: -15),
             createAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
+        
+        lineViews.forEach { lineView in
+            lineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+            lineView.leftAnchor.constraint(equalTo: stackView.leftAnchor).isActive = true
+            lineView.rightAnchor.constraint(equalTo: stackView.rightAnchor).isActive = true
+        }
+    }
+    
+    typealias LineViews = [UIView]
+    private func makeLineViews(_ views: [UIView]) -> LineViews {
+        var lineViews: [UIView] = []
+        for _ in 1...views.count {
+            let line = LineView()
+            lineViews.append(line)
+        }
+        
+        return lineViews
     }
     
 }

@@ -72,6 +72,8 @@
 		3C61326A2ACCA6B100783E37 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6132692ACCA6B100783E37 /* HeaderView.swift */; };
 		3C61326C2ACCAA0D00783E37 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61326B2ACCAA0D00783E37 /* Layout.swift */; };
 		3C61326E2ACCAF3D00783E37 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61326D2ACCAF3D00783E37 /* DataSource.swift */; };
+		3C7452D92AD0165C00AE924E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7452D82AD0165C00AE924E /* LoadingView.swift */; };
+		3C7452DB2AD019CB00AE924E /* PresentLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7452DA2AD019CB00AE924E /* PresentLoadingView.swift */; };
 		3CE7A6882ACC7ADC00A51077 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A6872ACC7ADC00A51077 /* MovieCell.swift */; };
 		3CE7A68A2ACC802B00A51077 /* FormattedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A6892ACC802B00A51077 /* FormattedDate.swift */; };
 /* End PBXBuildFile section */
@@ -159,6 +161,8 @@
 		3C6132692ACCA6B100783E37 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		3C61326B2ACCAA0D00783E37 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		3C61326D2ACCAF3D00783E37 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		3C7452D82AD0165C00AE924E /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		3C7452DA2AD019CB00AE924E /* PresentLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentLoadingView.swift; sourceTree = "<group>"; };
 		3CE7A6872ACC7ADC00A51077 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		3CE7A6892ACC802B00A51077 /* FormattedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedDate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -677,6 +681,7 @@
 			children = (
 				3C5173FF2ACB52C5007A3E3F /* ProfileController.swift */,
 				3C51741B2ACC3689007A3E3F /* CreateProfileUI.swift */,
+				3C7452DA2AD019CB00AE924E /* PresentLoadingView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -687,6 +692,7 @@
 				3C51741D2ACC4BE5007A3E3F /* CellView.swift */,
 				3C5174212ACC4CD9007A3E3F /* HeaderLabel.swift */,
 				3C5174232ACC4D83007A3E3F /* ProfileLabel.swift */,
+				3C7452D82AD0165C00AE924E /* LoadingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -869,6 +875,7 @@
 				3C5174202ACC4C7E007A3E3F /* VStack.swift in Sources */,
 				3C5174022ACB52FA007A3E3F /* SearchController.swift in Sources */,
 				3C0B4ADC2ACDCE9E00416EAC /* Item.swift in Sources */,
+				3C7452D92AD0165C00AE924E /* LoadingView.swift in Sources */,
 				3C2E3AE12ACB3CDB00485702 /* ExtensionUIImage.swift in Sources */,
 				3C51741E2ACC4BE5007A3E3F /* CellView.swift in Sources */,
 				3C2E3AA52ACB3B7000485702 /* MainController.swift in Sources */,
@@ -917,6 +924,7 @@
 				3C6132642ACC960B00783E37 /* CircularProgressView.swift in Sources */,
 				3C61326E2ACCAF3D00783E37 /* DataSource.swift in Sources */,
 				3C0B4B2B2ACF0A9100416EAC /* FullScreenImageController.swift in Sources */,
+				3C7452DB2AD019CB00AE924E /* PresentLoadingView.swift in Sources */,
 				3C0B4B2D2ACF144400416EAC /* PlayerController.swift in Sources */,
 				3C5174162ACBEE30007A3E3F /* ActionButton.swift in Sources */,
 			);

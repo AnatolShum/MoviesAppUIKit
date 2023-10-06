@@ -14,8 +14,6 @@ class LineView: UIView {
         
         self.backgroundColor = .systemGray.withAlphaComponent(0.4)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        self.widthAnchor.constraint(equalToConstant: 1000).isActive = true
     }
     
     required init?(coder: NSCoder) {

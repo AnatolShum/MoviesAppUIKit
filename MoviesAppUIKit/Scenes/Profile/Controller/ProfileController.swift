@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class ProfileController: UIViewController {
     let colorView = ColorView()
+    var loadingView: LoadingView!
     let profileImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "person.circle")
@@ -39,6 +40,7 @@ class ProfileController: UIViewController {
         title = "Profile"
         createProfileUI()
         fetchUser()
+        startShowingLoadingView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,6 +64,7 @@ class ProfileController: UIViewController {
                                     email: data["email"] as? String ?? "",
                                     joined: data["joined"] as? TimeInterval ?? 0)
                     self?.setLabelData(user)
+                    self?.stopShowingLoadingView()
                 }
             }
     }
