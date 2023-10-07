@@ -8,9 +8,19 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+    private let userID: String
+    
+    init(userID: String) {
+        self.userID = userID
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let moviesController = MoviesController(collectionViewLayout: UICollectionViewFlowLayout())
-    private let favouritesController = FavouritesController(collectionViewLayout: UICollectionViewFlowLayout())
+    private var favouritesController: FavouritesController!
     private let searchController = SearchController(collectionViewLayout: UICollectionViewFlowLayout())
     private let profileController = ProfileController()
     
@@ -30,6 +40,7 @@ class TabBarController: UITabBarController {
     }
     
     private func configureTabBar() {
+        favouritesController = FavouritesController(userID: userID, collectionViewLayout: UICollectionViewFlowLayout())
         moviesNavigationController = UINavigationController(rootViewController: moviesController)
         favouritesNavigationController = UINavigationController(rootViewController: favouritesController)
         searchNavigationController = UINavigationController(rootViewController: searchController)

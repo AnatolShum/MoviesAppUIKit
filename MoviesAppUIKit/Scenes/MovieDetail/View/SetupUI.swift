@@ -57,7 +57,6 @@ extension MovieDetailView {
             photosCollectionView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15),
             photosCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
             photosCollectionView.heightAnchor.constraint(equalToConstant: 100),
-            photosCollectionView.widthAnchor.constraint(equalToConstant: scrollView.frame.width - 30),
         ])
     }
 }

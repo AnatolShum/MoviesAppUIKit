@@ -57,9 +57,9 @@ class LoginController: UIViewController {
     }
     
     private func presentTabBar() {
-        let tabBar = TabBarController()
-        tabBar.modalPresentationStyle = .fullScreen
-        self.present(tabBar, animated: true)
+        let mainController = MainController()
+        mainController.modalPresentationStyle = .fullScreen
+        self.present(mainController, animated: true)
     }
     
     @objc func forgotButtonTapped() {

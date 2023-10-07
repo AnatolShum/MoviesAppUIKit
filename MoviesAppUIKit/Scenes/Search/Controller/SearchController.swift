@@ -50,5 +50,14 @@ class SearchController: UICollectionViewController {
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchController.searchBar.resignFirstResponder()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var movieDetailController: MovieDetailController!
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        movieDetailController = MovieDetailController(movie: item)
+        
+        navigationController?.pushViewController(movieDetailController, animated: true)
+    }
 
 }

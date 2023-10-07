@@ -21,7 +21,6 @@ class MainController: UIViewController {
         super.viewDidLoad()
         
         fetchCurrentUser()
-        checkScene()
     }
     
     private func fetchCurrentUser() {
@@ -29,13 +28,14 @@ class MainController: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.currentUserId = user?.uid ?? ""
+                self.checkScene()
             }
         })
     }
 
     private func checkScene() {
         if isSignedIn {
-            tabBar = TabBarController()
+            tabBar = TabBarController(userID: currentUserId)
             tabBar.modalPresentationStyle = .fullScreen
             DispatchQueue.main.async {
                 self.present(self.tabBar, animated: false)

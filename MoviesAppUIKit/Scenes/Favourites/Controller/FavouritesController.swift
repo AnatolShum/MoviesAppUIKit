@@ -6,76 +6,75 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class FavouritesController: UICollectionViewController {
     let colorView = ColorView()
+    var movies: [Movie] = []
     
-    override func loadView() {
-        super.loadView()
-        
-        view = colorView
+    private let userID: String
+    
+    init(userID: String, collectionViewLayout: UICollectionViewLayout) {
+        self.userID = userID
+        super.init(collectionViewLayout: collectionViewLayout)
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var sections = [Section]()
+    var dataSource: UICollectionViewDiffableDataSource<Section, Movie>!
+    var snapshot: NSDiffableDataSourceSnapshot<Section, Movie> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movies)
+        return snapshot
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      title = "Favourites"
+        
+        getFavourites()
+        
+        title = "Favourites"
+        collectionView.backgroundView = colorView
+        
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifier)
+        
+        collectionView.setCollectionViewLayout(createLayout(), animated: false)
+        configureDataSource()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        colorView.gradientLayer.frame = view.bounds
+        colorView.gradientLayer.frame = colorView.bounds
+        DispatchQueue.main.async {
+            self.collectionView.setCollectionViewLayout(self.createLayout(), animated: false)
+        }
     }
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
     
-        // Configure the cell
+    private func getFavourites() {
+        var favourites: [Favourite] = []
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(userID)
+            .collection("favourites")
+            .getDocuments { [weak self] snapshot, error in
+                guard let self = self else { return }
+                guard let documents = snapshot?.documents else { return}
+                documents.forEach { document in
+                    let data = document.data()
+                    let favourite = Favourite(
+                        id: data["id"] as? String ?? "",
+                        movieID: data["movieID"] as? Int ?? 0)
+                    favourites.append(favourite)
+                }
+                
+                self.fetchFavourites(favourites)
+            }
+    }
     
-        return cell
-    }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
