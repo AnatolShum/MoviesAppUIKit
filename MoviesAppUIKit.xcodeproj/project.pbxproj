@@ -83,6 +83,7 @@
 		3C7452E92AD17F4700AE924E /* FavouritesSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7452E82AD17F4700AE924E /* FavouritesSections.swift */; };
 		3C7452EB2AD17F7400AE924E /* FavouritesLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7452EA2AD17F7400AE924E /* FavouritesLayout.swift */; };
 		3C7452ED2AD17F9C00AE924E /* FavouritesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7452EC2AD17F9C00AE924E /* FavouritesDataSource.swift */; };
+		3C7452EF2AD1A39F00AE924E /* ProtocolIsFavourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7452EE2AD1A39F00AE924E /* ProtocolIsFavourites.swift */; };
 		3CE7A6882ACC7ADC00A51077 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A6872ACC7ADC00A51077 /* MovieCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +181,7 @@
 		3C7452E82AD17F4700AE924E /* FavouritesSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesSections.swift; sourceTree = "<group>"; };
 		3C7452EA2AD17F7400AE924E /* FavouritesLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesLayout.swift; sourceTree = "<group>"; };
 		3C7452EC2AD17F9C00AE924E /* FavouritesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataSource.swift; sourceTree = "<group>"; };
+		3C7452EE2AD1A39F00AE924E /* ProtocolIsFavourites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolIsFavourites.swift; sourceTree = "<group>"; };
 		3CE7A6872ACC7ADC00A51077 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -619,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				3C2E3B172ACB410900485702 /* FavouriteManager.swift */,
+				3C7452EE2AD1A39F00AE924E /* ProtocolIsFavourites.swift */,
 			);
 			path = FavouriteManager;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				3C2E3B182ACB410900485702 /* FavouriteManager.swift in Sources */,
 				3C0B4B222ACEFD2600416EAC /* SetupUI.swift in Sources */,
 				3C5174202ACC4C7E007A3E3F /* VStack.swift in Sources */,
+				3C7452EF2AD1A39F00AE924E /* ProtocolIsFavourites.swift in Sources */,
 				3C5174022ACB52FA007A3E3F /* SearchController.swift in Sources */,
 				3C0B4ADC2ACDCE9E00416EAC /* Item.swift in Sources */,
 				3C7452D92AD0165C00AE924E /* LoadingView.swift in Sources */,

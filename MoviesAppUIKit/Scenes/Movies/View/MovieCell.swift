@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol MovieCellDelegate: AnyObject {
+    func favouritesTapped()
+}
+
 class MovieCell: UICollectionViewCell {
     static let reuseIdentifier = "MovieCell"
+    
+    weak var delegate: MovieCellDelegate?
     
     let movieImageView: UIImageView = {
         let image = UIImageView()
@@ -57,6 +63,7 @@ class MovieCell: UICollectionViewCell {
         self.backgroundColor = .black.withAlphaComponent(0.9)
         createUI()
         setConstraints()
+        favouritesButton.addTarget(self, action: #selector(favouritesTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +72,7 @@ class MovieCell: UICollectionViewCell {
     
     private func createUI() {
         addSubview(movieImageView)
-        movieImageView.addSubview(favouritesButton)
+        addSubview(favouritesButton)
         addSubview(circleProgressView)
         addSubview(titleLabel)
         addSubview(releaseDateLabel)
@@ -76,8 +83,8 @@ class MovieCell: UICollectionViewCell {
             movieImageView.topAnchor.constraint(equalTo: topAnchor),
             movieImageView.leftAnchor.constraint(equalTo: leftAnchor),
             movieImageView.rightAnchor.constraint(equalTo: rightAnchor),
-            favouritesButton.topAnchor.constraint(equalTo: movieImageView.topAnchor, constant: 10),
-            favouritesButton.leftAnchor.constraint(equalTo: movieImageView.leftAnchor, constant: 15),
+            favouritesButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            favouritesButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             circleProgressView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 10),
             circleProgressView.leftAnchor.constraint(equalTo: leftAnchor, constant: 40),
             titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 50),
@@ -89,6 +96,10 @@ class MovieCell: UICollectionViewCell {
             releaseDateLabel.rightAnchor.constraint(equalTo: rightAnchor),
             releaseDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
+    }
+    
+    @objc func favouritesTapped() {
+        delegate?.favouritesTapped()
     }
     
     func configureCell(title: String?, releaseDate: String?, vote: Double?, poster: String?) {

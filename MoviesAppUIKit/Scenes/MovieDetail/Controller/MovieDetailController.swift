@@ -10,14 +10,24 @@ import UIKit
 class MovieDetailController: UIViewController {
     
     let movie: Movie
+    var manager: ProtocolFavouriteManager
     var movieDetailView: MovieDetailView!
     private var videos: [Videos] = []
     private var key: String? = ""
     private var favouritesButton: UIBarButtonItem!
     private var trailerButton: UIButton!
    
+    var isFavourite: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.favouritesButton.image = self.favouritesButtonImage()
+            }
+        }
+    }
+    
     init(movie: Movie) {
         self.movie = movie
+        self.manager = FavouriteManager(movie: movie)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,8 +46,11 @@ class MovieDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        manager.delegate = self
+        manager.checkFavourite()
+        
         fetchVideos()
-        favouritesButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favouritesTapped))
+        favouritesButton = UIBarButtonItem(image: favouritesButtonImage(), style: .plain, target: self, action: #selector(favouritesTapped))
         favouritesButton.tintColor = .systemPink
         navigationItem.rightBarButtonItem = favouritesButton
         trailerButton.addTarget(self, action: #selector(playTrailer), for: .touchUpInside)
@@ -51,7 +64,8 @@ class MovieDetailController: UIViewController {
     }
     
     @objc func favouritesTapped() {
-        
+        manager.toggleFavourites()
+        isFavourite.toggle()
     }
     
     func fetchVideos() {
@@ -91,4 +105,10 @@ class MovieDetailController: UIViewController {
         }
     }
     
+    private func favouritesButtonImage() -> UIImage {
+        UIImage(systemName: isFavourite ? "heart.fill" : "heart")!
+    }
+    
 }
+
+extension MovieDetailController: ProtocolIsFavourites { }

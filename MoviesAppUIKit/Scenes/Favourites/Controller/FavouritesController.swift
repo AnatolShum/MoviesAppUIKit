@@ -56,6 +56,15 @@ class FavouritesController: UICollectionViewController {
         }
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var movieDetailController: MovieDetailController!
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        movieDetailController = MovieDetailController(movie: item)
+        
+        navigationController?.pushViewController(movieDetailController, animated: true)
+    }
+    
     private func getFavourites() {
         var favourites: [Favourite] = []
         let db = Firestore.firestore()

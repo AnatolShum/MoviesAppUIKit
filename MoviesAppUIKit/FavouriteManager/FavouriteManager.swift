@@ -11,18 +11,18 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 protocol ProtocolFavouriteManager: AnyObject {
-    var isFavourite: Bool { get set }
+    var delegate: ProtocolIsFavourites? { get set }
     func checkFavourite()
     func toggleFavourites()
 }
 
-class FavouriteManager: ObservableObject, ProtocolFavouriteManager {
+class FavouriteManager: ProtocolFavouriteManager {
     let movie: Movie
     init(movie: Movie) {
         self.movie = movie
     }
     
-    @Published var isFavourite: Bool = false
+    weak var delegate: ProtocolIsFavourites?
     
     func checkFavourite() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -40,9 +40,9 @@ class FavouriteManager: ObservableObject, ProtocolFavouriteManager {
                         movieID == document.data().filter({ $0.key == "movieID" }).values.first as! Int
                     }
                     if exist != nil {
-                        self.isFavourite = true
+                        self.delegate?.isFavourite = true
                     } else {
-                        self.isFavourite = false
+                        self.delegate?.isFavourite = false
                     }
                 }
             }
