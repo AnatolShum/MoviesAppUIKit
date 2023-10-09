@@ -7,14 +7,13 @@
 
 import UIKit
 
-protocol MovieCellDelegate: AnyObject {
-    func favouritesTapped()
-}
-
 class MovieCell: UICollectionViewCell {
     static let reuseIdentifier = "MovieCell"
     
     weak var delegate: MovieCellDelegate?
+    
+    private var movie: Movie!
+    private var manager: ProtocolFavouriteManager!
     
     let movieImageView: UIImageView = {
         let image = UIImageView()
@@ -54,6 +53,16 @@ class MovieCell: UICollectionViewCell {
     }()
     
     var circleProgressView = CircularProgressView()
+    
+    var isFavourite: Bool = false {
+        didSet {
+            DispatchQueue.main.async {
+                let configuration = UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)
+                let image = UIImage(systemName: self.imageName(), withConfiguration: configuration)
+                self.favouritesButton.setImage(image, for: .normal)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,15 +108,22 @@ class MovieCell: UICollectionViewCell {
     }
     
     @objc func favouritesTapped() {
-        delegate?.favouritesTapped()
+        delegate?.reloadDataSource()
+        guard manager != nil else { return }
+        manager.toggleFavourites()
+        isFavourite.toggle()
     }
     
-    func configureCell(title: String?, releaseDate: String?, vote: Double?, poster: String?) {
-        titleLabel.text = title
-        releaseDateLabel.text = formattedDate(releaseDate)
-        circleProgressView.progressAnimation(vote)
-        circleProgressView.voteLabel.text = formattedString(vote ?? 0)
-        fetchImage(poster)
+    func configureCell(with movie: Movie) {
+        self.movie = movie
+        self.manager = FavouriteManager(movie: movie)
+        manager.delegate = self
+        manager.checkFavourite()
+        titleLabel.text = movie.title
+        releaseDateLabel.text = formattedDate(movie.releaseDate)
+        circleProgressView.progressAnimation(movie.vote)
+        circleProgressView.voteLabel.text = formattedString(movie.vote ?? 0)
+        fetchImage(movie.poster)
     }
     
     private func formattedString(_ vote: Double) -> String {
@@ -138,4 +154,10 @@ class MovieCell: UICollectionViewCell {
             }
         }
     }
+    
+    private func imageName() -> String {
+        isFavourite ? "heart.fill" : "heart"
+    }
 }
+
+extension MovieCell: ProtocolIsFavourites { }

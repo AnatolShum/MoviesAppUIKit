@@ -13,7 +13,7 @@ extension SearchController {
         dataSource = .init(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
             
-            cell.configureCell(title: item.title, releaseDate: item.releaseDate, vote: item.vote, poster: item.poster)
+            cell.configureCell(with: item)
             
             return cell
         })

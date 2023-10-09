@@ -25,7 +25,7 @@ extension FavouritesController {
                                           vote: success.vote)
                         self.movies.append(movie)
                         
-                        self.dataSource.apply(self.snapshot)
+                        self.reloadData()
                     case .failure(let failure):
                         print(failure.localizedDescription)
                     }

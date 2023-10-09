@@ -13,11 +13,22 @@ extension FavouritesController {
         dataSource = .init(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
             
-            cell.configureCell(title: item.title, releaseDate: item.releaseDate, vote: item.vote, poster: item.poster)
+            cell.delegate = self
+            cell.configureCell(with: item)
             
             return cell
         })
         
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movies)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func reloadData() {
+        snapshot.deleteAllItems()
+        snapshot.deleteSections([.main])
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movies)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }

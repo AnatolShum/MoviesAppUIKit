@@ -65,15 +65,4 @@ extension MoviesController {
         }
     }
     
-    private func applyDataSource() {
-        snapshot.deleteSections([.nowPlaying, .topRated, .popular])
-        snapshot.deleteAllItems()
-        
-        snapshot.appendSections([.nowPlaying, .topRated, .popular])
-        snapshot.appendItems(Item.nowPlayingMovies, toSection: .nowPlaying)
-        snapshot.appendItems(Item.topRatedMovies, toSection: .topRated)
-        snapshot.appendItems(Item.popularMovies, toSection: .popular)
-        sections = snapshot.sectionIdentifiers
-        dataSource.apply(snapshot)
-    }
 }

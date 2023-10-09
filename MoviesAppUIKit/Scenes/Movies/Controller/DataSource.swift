@@ -16,19 +16,19 @@ extension MoviesController {
             case .nowPlaying:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
                 
-                cell.configureCell(title: item.nowPlaying?.title, releaseDate: item.nowPlaying?.releaseDate, vote: item.nowPlaying?.vote, poster: item.nowPlaying?.poster)
+                cell.configureCell(with: item.nowPlaying!)
                 
                 return cell
             case .topRated:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
                 
-                cell.configureCell(title: item.topRated?.title, releaseDate: item.topRated?.releaseDate, vote: item.topRated?.vote, poster: item.topRated?.poster)
+                cell.configureCell(with: item.topRated!)
   
                 return cell
             case .popular:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
                 
-                cell.configureCell(title: item.popular?.title, releaseDate: item.popular?.releaseDate, vote: item.popular?.vote, poster: item.popular?.poster)
+                cell.configureCell(with: item.popular!)
            
                 return cell
             }
@@ -55,5 +55,17 @@ extension MoviesController {
             
             return headerView
         }
+    }
+    
+    func applyDataSource() {
+        snapshot.deleteSections([.nowPlaying, .topRated, .popular])
+        snapshot.deleteAllItems()
+        
+        snapshot.appendSections([.nowPlaying, .topRated, .popular])
+        snapshot.appendItems(Item.nowPlayingMovies, toSection: .nowPlaying)
+        snapshot.appendItems(Item.topRatedMovies, toSection: .topRated)
+        snapshot.appendItems(Item.popularMovies, toSection: .popular)
+        sections = snapshot.sectionIdentifiers
+        dataSource.apply(snapshot)
     }
 }

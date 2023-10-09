@@ -26,17 +26,10 @@ class FavouritesController: UICollectionViewController {
     
     var sections = [Section]()
     var dataSource: UICollectionViewDiffableDataSource<Section, Movie>!
-    var snapshot: NSDiffableDataSourceSnapshot<Section, Movie> {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(movies)
-        return snapshot
-    }
+    var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getFavourites()
         
         title = "Favourites"
         collectionView.backgroundView = colorView
@@ -45,6 +38,12 @@ class FavouritesController: UICollectionViewController {
         
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
         configureDataSource()
+    }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        
+        getFavourites()
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,7 +64,7 @@ class FavouritesController: UICollectionViewController {
         navigationController?.pushViewController(movieDetailController, animated: true)
     }
     
-    private func getFavourites() {
+    func getFavourites() {
         var favourites: [Favourite] = []
         let db = Firestore.firestore()
         db.collection("users")
