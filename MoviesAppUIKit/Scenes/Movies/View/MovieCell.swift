@@ -130,7 +130,7 @@ class MovieCell: UICollectionViewCell {
         return String(format: "%.1f", vote)
     }
     
-    private func formattedDate(_ date: String?) -> String {
+    func formattedDate(_ date: String?) -> String {
         guard let inputDate = date else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

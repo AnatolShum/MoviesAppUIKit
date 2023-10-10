@@ -1,14 +1,17 @@
 //
-//  MainController.swift
+//  MainControllerMock.swift
 //  MoviesAppUIKit
 //
-//  Created by Anatolii Shumov on 02/10/2023.
+//  Created by Anatolii Shumov on 10/10/2023.
 //
 
 import UIKit
 import FirebaseAuth
 
-class MainController: UIViewController {
+import UIKit
+import FirebaseAuth
+
+class MainControllerMock: UIViewController {
     private var handler: AuthStateDidChangeListenerHandle?
     var currentUserId: String = ""
     var isSignedIn: Bool {
@@ -25,6 +28,12 @@ class MainController: UIViewController {
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
+        
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
         
         fetchCurrentUser()
     }
@@ -58,4 +67,4 @@ class MainController: UIViewController {
 
 }
 
-extension MainController: MainProtocol {}
+extension MainControllerMock: MainProtocol {}

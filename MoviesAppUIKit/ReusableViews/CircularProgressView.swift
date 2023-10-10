@@ -86,7 +86,7 @@ class CircularProgressView: UIView {
         progressLayer.strokeColor = setColor(with: vote).cgColor
     }
     
-    private func setColor(with vote: Double?) -> UIColor {
+    func setColor(with vote: Double?) -> UIColor {
         guard let vote = vote else { return .gray }
         switch vote {
         case 0..<3:

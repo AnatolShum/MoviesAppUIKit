@@ -11,13 +11,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var mainController: MainController!
+    var mainControllerMock: MainControllerMock!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        mainController = MainController()
+        
         guard let mainScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: mainScene)
         window.makeKeyAndVisible()
-        window.rootViewController = mainController
+        
+        if ProcessInfo().arguments.contains("-ui-testing") {
+            mainControllerMock = MainControllerMock()
+            window.rootViewController = mainControllerMock
+        } else {
+            mainController = MainController()
+            window.rootViewController = mainController
+        }
         
         self.window = window
     }
