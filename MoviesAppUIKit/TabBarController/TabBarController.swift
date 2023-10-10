@@ -19,10 +19,10 @@ class TabBarController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let moviesController = MoviesController(collectionViewLayout: UICollectionViewFlowLayout())
+    private var moviesController: MoviesController!
     private var favouritesController: FavouritesController!
-    private let searchController = SearchController(collectionViewLayout: UICollectionViewFlowLayout())
-    private let profileController = ProfileController()
+    private var searchController: SearchController!
+    private var profileController: ProfileController!
     
     private var moviesNavigationController: UINavigationController!
     private var favouritesNavigationController: UINavigationController!
@@ -40,7 +40,10 @@ class TabBarController: UITabBarController {
     }
     
     private func configureTabBar() {
+        moviesController = MoviesController(collectionViewLayout: UICollectionViewFlowLayout())
         favouritesController = FavouritesController(userID: userID, collectionViewLayout: UICollectionViewFlowLayout())
+        searchController = SearchController(collectionViewLayout: UICollectionViewFlowLayout())
+        profileController = ProfileController()
         moviesNavigationController = UINavigationController(rootViewController: moviesController)
         favouritesNavigationController = UINavigationController(rootViewController: favouritesController)
         searchNavigationController = UINavigationController(rootViewController: searchController)

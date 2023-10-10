@@ -15,10 +15,16 @@ class MainController: UIViewController {
         return Auth.auth().currentUser != nil
     }
     private var tabBar: TabBarController!
+    private var loginNavigationController: UINavigationController!
     private var loginController: LoginController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
         
         fetchCurrentUser()
     }
@@ -45,9 +51,10 @@ class MainController: UIViewController {
                 
             } else {
                 loginController = LoginController()
-                loginController.modalPresentationStyle = .fullScreen
+                loginNavigationController = UINavigationController(rootViewController: loginController)
+                loginNavigationController.modalPresentationStyle = .fullScreen
                 DispatchQueue.main.async {
-                    self.present(self.loginController, animated: false)
+                    self.present(self.loginNavigationController, animated: false)
                 }
             }
         }

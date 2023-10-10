@@ -26,7 +26,7 @@ class ProfileController: UIViewController {
     var emailLabel: UILabel!
     var memberSinceLabel: UILabel!
     
-    var loginController: LoginController!
+    var mainController: MainController!
     
     override func loadView() {
         super.loadView()
@@ -78,13 +78,23 @@ class ProfileController: UIViewController {
     @objc func signOutButtonTapped() {
         do {
             try Auth.auth().signOut()
-            loginController = LoginController()
-            loginController.modalPresentationStyle = .fullScreen
-            self.present(loginController, animated: true)
+            presentMainController()
+            deleteItems()
         } catch {
-            loginController = nil
             print(error.localizedDescription)
         }
     }
 
+    private func presentMainController() {
+        mainController = MainController()
+        mainController.modalPresentationStyle = .fullScreen
+        self.present(mainController, animated: true)
+    }
+    
+    private func deleteItems() {
+        Item.nowPlayingMovies = []
+        Item.topRatedMovies = []
+        Item.popularMovies = []
+    }
+    
 }

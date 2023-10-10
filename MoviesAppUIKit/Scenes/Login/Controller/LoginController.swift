@@ -10,6 +10,9 @@ import FirebaseAuth
 
 class LoginController: UIViewController {
     private var titleView: TitleView!
+    private var mainController: MainController!
+    private var forgotController: ForgotController!
+    private var registerController: RegisterController!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
     var forgotButton: UIButton!
@@ -37,7 +40,7 @@ class LoginController: UIViewController {
                 self?.displayError(error!.localizedDescription)
                 return }
             
-            self?.presentTabBar()
+            self?.presentMain()
         }
     }
     
@@ -56,18 +59,20 @@ class LoginController: UIViewController {
         return true
     }
     
-    private func presentTabBar() {
-        let mainController = MainController()
+    private func presentMain() {
+        mainController = MainController()
         mainController.modalPresentationStyle = .fullScreen
         self.present(mainController, animated: true)
     }
     
     @objc func forgotButtonTapped() {
-        
+       forgotController = ForgotController()
+        navigationController?.pushViewController(forgotController, animated: true)
     }
     
     @objc func createAccountTapped() {
-        
+        registerController = RegisterController()
+        navigationController?.pushViewController(registerController, animated: true)
     }
     
     @objc func logInButtonTapped() {

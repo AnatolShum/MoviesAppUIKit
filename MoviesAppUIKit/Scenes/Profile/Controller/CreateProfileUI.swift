@@ -54,18 +54,12 @@ extension ProfileController {
         memberSinceVStack.addArrangedSubview(memberSinceHStack)
         memberSinceVStack.addArrangedSubview(memberSinceView)
         
-        let signOutView = CellView()
-        let signOutButton: UIButton = {
-            let button = UIButton()
-            button.setTitle("Sign out", for: .normal)
-            button.setTitleColor(.systemRed, for: .normal)
-            button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
+        let signOutButton = ActionButton(title: "Sign out", color: .white.withAlphaComponent(0.7))
+        signOutButton.setTitleColor(.systemRed, for: .normal)
+        signOutButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        
         signOutButton.addTarget(self, action: #selector(signOutButtonTapped), for: .touchUpInside)
-        signOutView.addSubview(signOutButton)
-        view.addSubview(signOutView)
+        view.addSubview(signOutButton)
         
         NSLayoutConstraint.activate([
             profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -93,11 +87,10 @@ extension ProfileController {
             memberSinceVStack.topAnchor.constraint(equalTo: emailVStack.bottomAnchor, constant: 30),
             memberSinceVStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             memberSinceVStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            signOutButton.centerXAnchor.constraint(equalTo: signOutView.centerXAnchor),
-            signOutButton.centerYAnchor.constraint(equalTo: signOutView.centerYAnchor),
-            signOutView.topAnchor.constraint(greaterThanOrEqualTo: memberSinceVStack.bottomAnchor, constant: 70),
-            signOutView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            signOutView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            signOutButton.topAnchor.constraint(greaterThanOrEqualTo: memberSinceVStack.bottomAnchor, constant: 70),
+            signOutButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            signOutButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            signOutButton.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 }
