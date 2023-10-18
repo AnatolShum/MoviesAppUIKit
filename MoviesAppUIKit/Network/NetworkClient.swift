@@ -24,7 +24,7 @@ extension Network {
         
         func fetch<Request, Response>(_ argument: Argument, method: Method = .get, body: Request? = nil, then callback: ((Result<Response, Errors>) -> Void)? = nil) where Request: Codable, Response: Codable {
             guard let url = argument.url else { return }
-            print(url)
+            
             var urlRequest = URLRequest(url: url)
             
             if let body = body {

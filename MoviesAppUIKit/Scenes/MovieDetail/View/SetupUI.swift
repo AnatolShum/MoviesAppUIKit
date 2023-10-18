@@ -39,6 +39,7 @@ extension MovieDetailView {
             scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             topImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             topImageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            topImageView.heightAnchor.constraint(equalTo: topImageView.widthAnchor, multiplier: 1/1.3),
             topImageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
             topImageView.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
             titleStackView.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 10),

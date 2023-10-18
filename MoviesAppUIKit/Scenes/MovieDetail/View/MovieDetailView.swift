@@ -27,6 +27,8 @@ class MovieDetailView: UIView {
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(systemName: "film")
+        image.tintColor = .white.withAlphaComponent(0.1)
         return image
     }()
     
@@ -146,9 +148,6 @@ class MovieDetailView: UIView {
                     self.backgroundColor = backdrop.averageColor()
                 }
             } catch {
-                DispatchQueue.main.async {
-                    self.topImageView.image = UIImage(systemName: "film")
-                }
                 print(error.localizedDescription)
             }
         }

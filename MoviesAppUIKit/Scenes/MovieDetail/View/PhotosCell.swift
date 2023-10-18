@@ -13,6 +13,7 @@ class PhotosCell: UICollectionViewCell {
     let photoImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "film")
+        image.tintColor = .systemGray.withAlphaComponent(0.5)
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image

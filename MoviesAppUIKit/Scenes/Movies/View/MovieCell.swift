@@ -149,6 +149,8 @@ class MovieCell: UICollectionViewCell {
             } catch {
                 DispatchQueue.main.async {
                     self.movieImageView.image = UIImage(systemName: "film")
+                    self.movieImageView.tintColor = .white.withAlphaComponent(0.1)
+                    self.movieImageView.contentMode = .scaleAspectFit
                 }
                 print(error.localizedDescription)
             }
