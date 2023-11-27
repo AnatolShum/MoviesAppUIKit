@@ -87,7 +87,31 @@ final class MoviesAppUIKitUITests: XCTestCase {
     func testItems() throws {
         login()
         
-       
+        let collectionView = app.collectionViews
+        let cell = collectionView.cells.containing(.image, identifier: nil).element(boundBy: 0)
+        cell.tap()
+
+        let imagesCollectionView = app.collectionViews.children(matching: .cell).element(boundBy: 0)
+        imagesCollectionView.tap()
+        
+        let nextButton = app.buttons["chevronRight"]
+        nextButton.tap()
+        nextButton.tap()
+        
+        let previousButton = app.buttons["chevronLeft"]
+        previousButton.tap()
+        previousButton.tap()
+        previousButton.tap()
+        
+        let moviesNavigationBar = app.navigationBars["Movies"]
+        let backButton = moviesNavigationBar.buttons["Back"]
+        backButton.tap()
+        let backToMovies = moviesNavigationBar.buttons["Movies"]
+        backToMovies.tap()
+                
+        let favouritesButton = cell.buttons["love"]
+        favouritesButton.tap()
+        favouritesButton.tap()
     }
     
     func testLogout() throws {

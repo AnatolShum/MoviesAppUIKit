@@ -118,12 +118,15 @@ class MovieCell: UICollectionViewCell {
         self.movie = movie
         self.manager = FavouriteManager(movie: movie)
         manager.delegate = self
-        manager.checkFavourite()
-        titleLabel.text = movie.title
-        releaseDateLabel.text = formattedDate(movie.releaseDate)
-        circleProgressView.progressAnimation(movie.vote)
-        circleProgressView.voteLabel.text = formattedString(movie.vote ?? 0)
-        fetchImage(movie.poster)
+        
+        DispatchQueue.main.async {
+            self.manager.checkFavourite()
+            self.titleLabel.text = movie.title
+            self.releaseDateLabel.text = self.formattedDate(movie.releaseDate)
+            self.circleProgressView.progressAnimation(movie.vote)
+            self.circleProgressView.voteLabel.text = self.formattedString(movie.vote ?? 0)
+            self.fetchImage(movie.poster)
+        }
     }
     
     private func formattedString(_ vote: Double) -> String {

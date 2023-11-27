@@ -37,10 +37,12 @@ class MoviesController: UICollectionViewController {
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         
-        snapshot.reloadItems(Item.nowPlayingMovies)
-        snapshot.reloadItems(Item.topRatedMovies)
-        snapshot.reloadItems(Item.popularMovies)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        DispatchQueue.main.async {
+            self.snapshot.reloadItems(Item.nowPlayingMovies)
+            self.snapshot.reloadItems(Item.topRatedMovies)
+            self.snapshot.reloadItems(Item.popularMovies)
+            self.dataSource.apply(self.snapshot, animatingDifferences: false)
+        }
     }
     
     override func viewDidLayoutSubviews() {

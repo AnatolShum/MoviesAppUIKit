@@ -43,6 +43,7 @@ class FullScreenImageController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "chevronLeft"
         return button
     }()
     
@@ -55,6 +56,7 @@ class FullScreenImageController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "chevronRight"
         return button
     }()
     
