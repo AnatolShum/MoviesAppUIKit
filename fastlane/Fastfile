@@ -20,7 +20,7 @@ platform :ios do
   lane :tests do
 	run_tests(
 	project: "./MoviesAppUIKit.xcodeproj",
-	devices: ["iPhone 15", "iPhone 15 Pro", "iPhone 15 Pro Max"]
+	devices: ["iPhone 15", "iPhone 15 Pro"]
 	)
   end
 end

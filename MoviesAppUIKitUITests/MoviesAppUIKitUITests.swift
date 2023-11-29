@@ -87,11 +87,16 @@ final class MoviesAppUIKitUITests: XCTestCase {
     func testItems() throws {
         login()
         
-        let collectionView = app.collectionViews
-        let cell = collectionView.cells.containing(.image, identifier: nil).element(boundBy: 0)
+        let collectionView = app.collectionViews.element(boundBy: 0)
+        XCTAssertTrue(collectionView.waitForExistence(timeout: 10))
+        let cell = collectionView.cells.element(boundBy: 0)
+        XCTAssertTrue(cell.waitForExistence(timeout: 10))
         cell.tap()
-
-        let imagesCollectionView = app.collectionViews.children(matching: .cell).element(boundBy: 0)
+        
+        let scrollView = app.scrollViews.otherElements.staticTexts["Overview"]
+        scrollView.swipeUp()
+       
+        let imagesCollectionView = app.collectionViews.cells.containing(.image, identifier: nil).element(boundBy: 1)
         imagesCollectionView.tap()
         
         let nextButton = app.buttons["chevronRight"]
