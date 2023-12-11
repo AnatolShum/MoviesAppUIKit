@@ -42,6 +42,9 @@ class SearchController: UICollectionViewController {
         super.viewDidLayoutSubviews()
         
         colorView.gradientLayer.frame = colorView.bounds
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         DispatchQueue.main.async {
             self.collectionView.setCollectionViewLayout(self.createLayout(), animated: false)
         }

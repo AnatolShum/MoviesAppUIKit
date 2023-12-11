@@ -64,6 +64,14 @@ class MovieCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        DispatchQueue.main.async {
+            self.movieImageView.image = nil
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -92,6 +100,7 @@ class MovieCell: UICollectionViewCell {
             movieImageView.topAnchor.constraint(equalTo: topAnchor),
             movieImageView.leftAnchor.constraint(equalTo: leftAnchor),
             movieImageView.rightAnchor.constraint(equalTo: rightAnchor),
+            movieImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.65),
             favouritesButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             favouritesButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             circleProgressView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 10),

@@ -70,17 +70,17 @@ class MoviesController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            if Item.nowPlayingMovies.count - 1 == indexPath.item {
+            if Item.nowPlayingMovies.count - 5 == indexPath.item {
                 nowPlayingPage += 1
                 fetchNowPlaying(with: nowPlayingPage)
             }
         case 1:
-            if Item.topRatedMovies.count - 1 == indexPath.item {
+            if Item.topRatedMovies.count - 5 == indexPath.item {
                 topRatedPage += 1
                 fetchTopRated(with: topRatedPage)
             }
         case 2:
-            if Item.popularMovies.count - 1 == indexPath.item {
+            if Item.popularMovies.count - 5 == indexPath.item {
                 popularPage += 1
                 fetchPopular(with: popularPage)
             }
