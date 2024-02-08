@@ -6,17 +6,23 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class MainController: UIViewController {
-    private var handler: AuthStateDidChangeListenerHandle?
-    var currentUserId: String = ""
-    var isSignedIn: Bool {
-        return Auth.auth().currentUser != nil
+    private var tabBar: TabBarController?
+    private var loginNavigationController: UINavigationController?
+    private var loginController: LoginController?
+    private var verifyController: VerifyController?
+    internal var authService: AuthService = AuthService()
+    internal var isSignedIn: Bool {
+        return authService.currentUser != nil
     }
-    private var tabBar: TabBarController!
-    private var loginNavigationController: UINavigationController!
-    private var loginController: LoginController!
+    internal var isEmailVerified: Bool {
+        if let user = authService.currentUser {
+            return user.isEmailVerified
+        } else {
+            return false
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,33 +32,54 @@ class MainController: UIViewController {
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         
-        fetchCurrentUser()
-    }
-    
-    private func fetchCurrentUser() {
-        handler = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.currentUserId = user?.uid ?? ""
-                self.checkScene()
-            }
-        })
+        checkScene()
     }
 
     private func checkScene() {
         if isSignedIn {
-            tabBar = TabBarController(userID: currentUserId)
-            tabBar.modalPresentationStyle = .fullScreen
-            DispatchQueue.main.async {
-                self.present(self.tabBar, animated: false)
+            if isEmailVerified {
+                presentTabBar()
+            } else {
+                // send email verification
+                
+                presentVerifyView() // with information about verification
+                // 60 sec before send again
+                // button with route to LoginView
+                // tapped button actions:
+                // signOut
+                // present LoginView
             }
         } else {
-            loginController = LoginController()
-            loginNavigationController = UINavigationController(rootViewController: loginController)
-            loginNavigationController.modalPresentationStyle = .fullScreen
-            DispatchQueue.main.async {
-                self.present(self.loginNavigationController, animated: false)
-            }
+            presentLoginView()
+        }
+    }
+    
+    private func presentTabBar() {
+        tabBar = TabBarController(userID: "")
+        guard let tabBar else { return }
+        tabBar.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async {
+            self.present(tabBar, animated: false)
+        }
+    }
+    
+    private func presentVerifyView() {
+        verifyController = VerifyController()
+        guard let verifyController else { return }
+        verifyController.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async {
+            self.present(verifyController, animated: false)
+        }
+    }
+    
+    private func presentLoginView() {
+        loginController = LoginController()
+        guard let loginController else { return }
+        loginNavigationController = UINavigationController(rootViewController: loginController)
+        guard let loginNavigationController else { return }
+        loginNavigationController.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async {
+            self.present(loginNavigationController, animated: false)
         }
     }
 

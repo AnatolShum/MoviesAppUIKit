@@ -49,14 +49,28 @@ class RegisterController: UIViewController {
     }
     
     private func register() {
-        guard validate() else { return }
+        let service = AuthService()
+//        service.createUser(email: email, password: password) { result in
+//            switch result {
+//            case .success(let user):
+//                print(user)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
         
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            guard let self = self else { return }
-            guard let userID = result?.user.uid else { return }
-            
-            self.saveUserRecord(id: userID)
-        }
+        
+        
+        
+        
+//        guard validate() else { return }
+//        
+//        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+//            guard let self = self else { return }
+//            guard let userID = result?.user.uid else { return }
+//            
+//            self.saveUserRecord(id: userID)
+//        }
     }
     
     private func saveUserRecord(id: String) {

@@ -21,6 +21,16 @@
 		3C0B4B332ACF271000416EAC /* FullScreenCreateUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4B322ACF271000416EAC /* FullScreenCreateUI.swift */; };
 		3C0B4B352ACF2A3B00416EAC /* ButtonsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4B342ACF2A3B00416EAC /* ButtonsActions.swift */; };
 		3C0B4B372ACF30D700416EAC /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0B4B362ACF30D700416EAC /* Gesture.swift */; };
+		3C0EAA1E2B740EF8001AB97E /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA1D2B740EF8001AB97E /* AuthProvider.swift */; };
+		3C0EAA212B740FC6001AB97E /* FirebaseProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA202B740FC6001AB97E /* FirebaseProviderProtocol.swift */; };
+		3C0EAA232B741026001AB97E /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA222B741026001AB97E /* FirebaseService.swift */; };
+		3C0EAA252B74109B001AB97E /* FirebaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA242B74109B001AB97E /* FirebaseProvider.swift */; };
+		3C0EAA272B741C3A001AB97E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA262B741C3A001AB97E /* AuthService.swift */; };
+		3C0EAA292B741C54001AB97E /* AuthProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA282B741C54001AB97E /* AuthProviderProtocol.swift */; };
+		3C0EAA2B2B7426FD001AB97E /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA2A2B7426FD001AB97E /* AuthUser.swift */; };
+		3C0EAA2F2B7508DA001AB97E /* VerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA2E2B7508DA001AB97E /* VerifyController.swift */; };
+		3C0EAA312B750905001AB97E /* VerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA302B750905001AB97E /* VerifyView.swift */; };
+		3C0EAA362B751718001AB97E /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA352B751717001AB97E /* AlertManager.swift */; };
 		3C2E3AA12ACB3B7000485702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2E3AA02ACB3B7000485702 /* AppDelegate.swift */; };
 		3C2E3AA32ACB3B7000485702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2E3AA22ACB3B7000485702 /* SceneDelegate.swift */; };
 		3C2E3AA52ACB3B7000485702 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2E3AA42ACB3B7000485702 /* MainController.swift */; };
@@ -131,6 +141,16 @@
 		3C0B4B322ACF271000416EAC /* FullScreenCreateUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCreateUI.swift; sourceTree = "<group>"; };
 		3C0B4B342ACF2A3B00416EAC /* ButtonsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsActions.swift; sourceTree = "<group>"; };
 		3C0B4B362ACF30D700416EAC /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
+		3C0EAA1D2B740EF8001AB97E /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		3C0EAA202B740FC6001AB97E /* FirebaseProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseProviderProtocol.swift; sourceTree = "<group>"; };
+		3C0EAA222B741026001AB97E /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		3C0EAA242B74109B001AB97E /* FirebaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseProvider.swift; sourceTree = "<group>"; };
+		3C0EAA262B741C3A001AB97E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		3C0EAA282B741C54001AB97E /* AuthProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviderProtocol.swift; sourceTree = "<group>"; };
+		3C0EAA2A2B7426FD001AB97E /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
+		3C0EAA2E2B7508DA001AB97E /* VerifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyController.swift; sourceTree = "<group>"; };
+		3C0EAA302B750905001AB97E /* VerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyView.swift; sourceTree = "<group>"; };
+		3C0EAA352B751717001AB97E /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		3C2E3A9D2ACB3B7000485702 /* MoviesAppUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesAppUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2E3AA02ACB3B7000485702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C2E3AA22ACB3B7000485702 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -265,6 +285,86 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		3C0EAA1A2B740BE0001AB97E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EAA1B2B740D98001AB97E /* Auth */,
+				3C0EAA1C2B740DA3001AB97E /* Firestore */,
+				3C0EAA1F2B740F91001AB97E /* Firebase */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3C0EAA1B2B740D98001AB97E /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EAA282B741C54001AB97E /* AuthProviderProtocol.swift */,
+				3C0EAA2A2B7426FD001AB97E /* AuthUser.swift */,
+				3C0EAA262B741C3A001AB97E /* AuthService.swift */,
+				3C0EAA1D2B740EF8001AB97E /* AuthProvider.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		3C0EAA1C2B740DA3001AB97E /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		3C0EAA1F2B740F91001AB97E /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EAA202B740FC6001AB97E /* FirebaseProviderProtocol.swift */,
+				3C0EAA222B741026001AB97E /* FirebaseService.swift */,
+				3C0EAA242B74109B001AB97E /* FirebaseProvider.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		3C0EAA2C2B75088A001AB97E /* Verify */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EAA322B750916001AB97E /* View */,
+				3C0EAA2D2B7508B4001AB97E /* Controller */,
+			);
+			path = Verify;
+			sourceTree = "<group>";
+		};
+		3C0EAA2D2B7508B4001AB97E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EAA2E2B7508DA001AB97E /* VerifyController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3C0EAA322B750916001AB97E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EAA302B750905001AB97E /* VerifyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3C0EAA332B7516B6001AB97E /* AlertErrorManager */ = {
+			isa = PBXGroup;
+			children = (
+				3C0EAA352B751717001AB97E /* AlertManager.swift */,
+			);
+			path = AlertErrorManager;
+			sourceTree = "<group>";
+		};
+		3C0EAA342B7516D7001AB97E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3C2E3B162ACB40F900485702 /* FavouriteManager */,
+				3C0EAA332B7516B6001AB97E /* AlertErrorManager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		3C2E3A942ACB3B7000485702 = {
 			isa = PBXGroup;
 			children = (
@@ -288,12 +388,13 @@
 		3C2E3A9F2ACB3B7000485702 /* MoviesAppUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				3C0EAA1A2B740BE0001AB97E /* Services */,
 				3C50DBBC2B5FDDE900CC7401 /* OnDemandResourcesManager */,
 				3C2E3ADD2ACB3C8400485702 /* Mocks */,
 				3C2E3AD12ACB3BF700485702 /* Application */,
 				3C5173F42ACB4CCE007A3E3F /* TabBarController */,
 				3C2E3AF12ACB3E4A00485702 /* Scenes */,
-				3C2E3B162ACB40F900485702 /* FavouriteManager */,
+				3C0EAA342B7516D7001AB97E /* Managers */,
 				3C2E3AD02ACB3BE000485702 /* Resources */,
 				3C51740C2ACB5EEB007A3E3F /* ReusableViews */,
 				3C5174072ACB54ED007A3E3F /* Protocols */,
@@ -365,6 +466,7 @@
 		3C2E3AF12ACB3E4A00485702 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3C0EAA2C2B75088A001AB97E /* Verify */,
 				3C5173F82ACB5268007A3E3F /* Profile */,
 				3C5173F72ACB525F007A3E3F /* Search */,
 				3C2E3B142ACB405300485702 /* Main */,
@@ -822,6 +924,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C0B4ADA2ACDBBD100416EAC /* FetchMovies.swift in Sources */,
+				3C0EAA2F2B7508DA001AB97E /* VerifyController.swift in Sources */,
 				3C2E3AE02ACB3CDB00485702 /* ExtensionEncodable.swift in Sources */,
 				3C2E3B182ACB410900485702 /* FavouriteManager.swift in Sources */,
 				3C0B4B222ACEFD2600416EAC /* SetupUI.swift in Sources */,
@@ -834,7 +937,9 @@
 				3C7452FF2AD5A57500AE924E /* ForgotController.swift in Sources */,
 				3C51741E2ACC4BE5007A3E3F /* CellView.swift in Sources */,
 				3C2E3AA52ACB3B7000485702 /* MainController.swift in Sources */,
+				3C0EAA212B740FC6001AB97E /* FirebaseProviderProtocol.swift in Sources */,
 				3C5174242ACC4D83007A3E3F /* ProfileLabel.swift in Sources */,
+				3C0EAA292B741C54001AB97E /* AuthProviderProtocol.swift in Sources */,
 				3C7453012AD5A66F00AE924E /* ForgotCreateUI.swift in Sources */,
 				3C61326C2ACCAA0D00783E37 /* Layout.swift in Sources */,
 				3C7452FD2AD59DB700AE924E /* RegisterDisplayError.swift in Sources */,
@@ -847,6 +952,7 @@
 				3C0B4ADE2ACDDB2100416EAC /* MovieDetailController.swift in Sources */,
 				3C7452E32AD05D9100AE924E /* SearchResultUpdating.swift in Sources */,
 				3C5174042ACB530D007A3E3F /* FavouritesController.swift in Sources */,
+				3C0EAA272B741C3A001AB97E /* AuthService.swift in Sources */,
 				3C2E3AD82ACB3C6700485702 /* NetworkErrors.swift in Sources */,
 				3C61326A2ACCA6B100783E37 /* HeaderView.swift in Sources */,
 				3C5174002ACB52C5007A3E3F /* ProfileController.swift in Sources */,
@@ -863,6 +969,7 @@
 				3C5174182ACC1FF4007A3E3F /* DisplayError.swift in Sources */,
 				3C5174102ACB63AF007A3E3F /* LineView.swift in Sources */,
 				3C7452F72AD43EFD00AE924E /* FavouritesCellDelegate.swift in Sources */,
+				3C0EAA1E2B740EF8001AB97E /* AuthProvider.swift in Sources */,
 				3C5174142ACB6868007A3E3F /* CreateUI.swift in Sources */,
 				3C2E3AA32ACB3B7000485702 /* SceneDelegate.swift in Sources */,
 				3C0B4AE42ACDEFD900416EAC /* PhotosCell.swift in Sources */,
@@ -873,6 +980,7 @@
 				3C7452F92AD547D000AE924E /* RegisterController.swift in Sources */,
 				3C0B4B332ACF271000416EAC /* FullScreenCreateUI.swift in Sources */,
 				3C0B4AE02ACDE02000416EAC /* MovieDetailView.swift in Sources */,
+				3C0EAA2B2B7426FD001AB97E /* AuthUser.swift in Sources */,
 				3C6132662ACCA50000783E37 /* Sections.swift in Sources */,
 				3C2E3ADC2ACB3C6700485702 /* NetworkTypes.swift in Sources */,
 				3C7453052AD5DC9600AE924E /* MainControllerMock.swift in Sources */,
@@ -887,8 +995,11 @@
 				3C2E3ADB2ACB3C6700485702 /* Network.swift in Sources */,
 				3C51741A2ACC300C007A3E3F /* ColorView.swift in Sources */,
 				3C2E3AFE2ACB3F0300485702 /* Videos.swift in Sources */,
+				3C0EAA362B751718001AB97E /* AlertManager.swift in Sources */,
 				3C6132682ACCA67500783E37 /* SupplementaryViewKind.swift in Sources */,
 				3C2E3AF72ACB3EB400485702 /* Movie.swift in Sources */,
+				3C0EAA232B741026001AB97E /* FirebaseService.swift in Sources */,
+				3C0EAA312B750905001AB97E /* VerifyView.swift in Sources */,
 				3C50DBC02B5FDE2000CC7401 /* ResourcesManager.swift in Sources */,
 				3C2E3ADA2ACB3C6700485702 /* NetworkClient.swift in Sources */,
 				3C51740E2ACB5F30007A3E3F /* TitleView.swift in Sources */,
@@ -900,6 +1011,7 @@
 				3C0B4B2D2ACF144400416EAC /* PlayerController.swift in Sources */,
 				3C5174162ACBEE30007A3E3F /* ActionButton.swift in Sources */,
 				3C7452F52AD43E3A00AE924E /* MovieCellDelegate.swift in Sources */,
+				3C0EAA252B74109B001AB97E /* FirebaseProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

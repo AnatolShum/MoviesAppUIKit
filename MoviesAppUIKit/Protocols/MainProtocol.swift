@@ -8,6 +8,7 @@
 import Foundation
 
 protocol MainProtocol: AnyObject {
-    var currentUserId: String { get set }
+    var authService: AuthService { get set }
+    var isEmailVerified: Bool { get }
     var isSignedIn: Bool { get }
 }
