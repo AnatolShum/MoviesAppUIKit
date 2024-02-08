@@ -10,13 +10,14 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class FavouritesController: UICollectionViewController {
+    private var authService: AuthService?
+    private var userID: String?
     let colorView = ColorView()
     var movies: [Movie] = []
     
-    private let userID: String
-    
-    init(userID: String, collectionViewLayout: UICollectionViewLayout) {
-        self.userID = userID
+    override init(collectionViewLayout: UICollectionViewLayout) {
+        authService = AuthService()
+        self.userID = authService?.currentUser?.id
         super.init(collectionViewLayout: collectionViewLayout)
     }
     
@@ -65,6 +66,7 @@ class FavouritesController: UICollectionViewController {
     }
     
     func getFavourites() {
+        guard let userID = userID else { return }
         var favourites: [Favourite] = []
         let db = Firestore.firestore()
         db.collection("users")

@@ -55,7 +55,7 @@ class MainControllerMock: UIViewController {
     }
     
     private func presentTabBar() {
-        tabBar = TabBarController(userID: "")
+        tabBar = TabBarController()
         guard let tabBar else { return }
         tabBar.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {

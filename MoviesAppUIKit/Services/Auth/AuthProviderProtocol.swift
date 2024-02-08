@@ -14,7 +14,6 @@ protocol AuthProviderProtocol {
     func signIn(email: String, password: String) -> Future<AuthUser?, Error>
     func createUser(email: String, password: String) -> Future<AuthUser?, Error>
     func signOut() -> Future<Void, Error>
-    
-//    // working func
-//    func createUser(email: String, password: String, completion: @escaping(Result<AuthUser?, Error>) -> Void)
+    func sendEmailVerification() -> Future<Void, Error>
+    func sendPasswordReset(email: String) -> Future<Void, Error>
 }

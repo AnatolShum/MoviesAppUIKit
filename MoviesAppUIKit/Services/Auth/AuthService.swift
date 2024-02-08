@@ -32,17 +32,11 @@ class AuthService: AuthProviderProtocol {
         return provider.signOut()
     }
     
+    func sendEmailVerification() -> Future<Void, Error> {
+        return provider.sendEmailVerification()
+    }
     
-//    // working func
-//    func createUser(email: String, password: String, completion: @escaping (Result<AuthUser?, Error>) -> Void) {
-//        provider.createUser(email: email, password: password) { result in
-//            switch result {
-//            case .success(let user):
-//                completion(.success(user))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-    
+    func sendPasswordReset(email: String) -> Future<Void, Error> {
+        return provider.sendPasswordReset(email: email)
+    }
 }

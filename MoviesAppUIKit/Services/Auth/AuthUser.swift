@@ -9,10 +9,12 @@ import Foundation
 
 class AuthUser {
     let id: String
+    let email: String
     let isEmailVerified: Bool
     
-    init(id: String, isEmailVerified: Bool) {
+    init(id: String, email: String, isEmailVerified: Bool) {
         self.id = id
+        self.email = email
         self.isEmailVerified = isEmailVerified
     }
 }

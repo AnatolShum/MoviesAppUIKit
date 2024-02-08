@@ -13,7 +13,11 @@ internal class AuthProvider: AuthProviderProtocol {
     var currentUser: AuthUser? {
         let user = Auth.auth().currentUser
         if let user {
-            return AuthUser(id: user.uid, isEmailVerified: user.isEmailVerified)
+            let authUser = AuthUser(
+                id: user.uid,
+                email: user.email ?? "N/A",
+                isEmailVerified: user.isEmailVerified)
+            return authUser
         } else {
             return nil
         }
@@ -51,7 +55,7 @@ internal class AuthProvider: AuthProviderProtocol {
     
     private func convertUser(_ result: AuthDataResult) -> AuthUser {
         let user = result.user
-        return AuthUser(id: user.uid, isEmailVerified: user.isEmailVerified)
+        return AuthUser(id: user.uid, email: user.email ?? "N/A", isEmailVerified: user.isEmailVerified)
     }
     
     func signOut() -> Future<Void, Error> {
@@ -65,57 +69,28 @@ internal class AuthProvider: AuthProviderProtocol {
         }
     }
     
+    func sendEmailVerification() -> Future<Void, Error> {
+        return Future { promise in
+            Auth.auth().currentUser?.sendEmailVerification(completion: { error in
+                if let error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(()))
+                }
+            })
+        }
+    }
     
-    //    // working func
-    //    func createUser(email: String, password: String, completion: @escaping(Result<AuthUser?, Error>) -> Void) {
-    //        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-    //            if let error {
-    //                completion(.failure(error))
-    //            }
-    //
-    //            if let result {
-    //                let user = result.user
-    //                completion(.success(AuthUser(
-    //                    id: user.uid,
-    //                    isEmailVerified: user.isEmailVerified
-    //                )))
-    //            }
-    //        }
-    //    }
+    func sendPasswordReset(email: String) -> Future<Void, Error> {
+        return Future { promise in
+            Auth.auth().sendPasswordReset(withEmail: email) { error in
+                if let error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(()))
+                }
+            }
+        }
+    }
+    
 }
-
-
-//func createUser(email: String, password: String) -> Future<AuthUser?, Error> {
-//    return Future() { promise in
-//
-//        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-//            if let error {
-//                promise(.failure(error))
-//            }
-//
-//            if let result {
-//                let user = result.user
-//                promise(.success(AuthUser(
-//                    id: user.uid,
-//                    isEmailVerified: user.isEmailVerified)))
-//            }
-//        }
-//
-//        promise(.success(AuthUser(id: "Test", isEmailVerified: true)))
-//    }
-//}
-//
-//let b = createUser(email: "", password: "").sink { er in
-//    switch er {
-//
-//    case .finished:
-//        print("Finished")
-//    case .failure(let error):
-//        print(error)
-//    }
-//} receiveValue: { user in
-//    print(user?.id)
-//}
-
-
-

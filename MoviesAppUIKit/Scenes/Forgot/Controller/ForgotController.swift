@@ -6,10 +6,13 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Combine
 
 class ForgotController: UIViewController {
     private var titleView: TitleView!
+    private var authService: AuthService?
+    private var alertManager: AlertManager?
+    private var observer: AnyCancellable?
     var emailTextField: UITextField!
     var email: String = ""
     var isNotError: Bool = false {
@@ -22,11 +25,11 @@ class ForgotController: UIViewController {
     
     override func loadView() {
         super.loadView()
-     
+        
         titleView = TitleView(title: "Lost password", color: .systemOrange, frame: view.frame)
         view = titleView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,27 +46,31 @@ class ForgotController: UIViewController {
     
     private func sendPasswordReset() {
         guard validate() else { return }
-        
-        Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
-            guard let self = self else { return }
-            
-            if let error = error?.localizedDescription {
-                self.displayError(error)
-            } else {
-                self.isNotError = true
-            }
-        }
+        authService = AuthService()
+        observer = authService?.sendPasswordReset(email: email)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let strongSelf = self else { return }
+                switch completion {
+                case .finished:
+                    strongSelf.isNotError = true
+                case .failure(let error):
+                    strongSelf.alertManager = AlertManager(strongSelf)
+                    strongSelf.alertManager?.displayError(error.localizedDescription)
+                }
+            }, receiveValue: {})
     }
     
     private func validate() -> Bool {
+        alertManager = AlertManager(self)
         isNotError = false
         guard !email.trimmingCharacters(in: .whitespaces).isEmpty else {
-            displayError("Please fill in email address.")
+            alertManager?.displayError("Please fill in email address.")
             return false
         }
         
         guard email.contains("@") && email.contains(".") else {
-            displayError("Please enter valid email.")
+            alertManager?.displayError("Please enter valid email.")
             return false
         }
         

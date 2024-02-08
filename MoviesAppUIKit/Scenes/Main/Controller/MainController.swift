@@ -40,14 +40,7 @@ class MainController: UIViewController {
             if isEmailVerified {
                 presentTabBar()
             } else {
-                // send email verification
-                
-                presentVerifyView() // with information about verification
-                // 60 sec before send again
-                // button with route to LoginView
-                // tapped button actions:
-                // signOut
-                // present LoginView
+                presentVerifyView()
             }
         } else {
             presentLoginView()
@@ -55,7 +48,7 @@ class MainController: UIViewController {
     }
     
     private func presentTabBar() {
-        tabBar = TabBarController(userID: "")
+        tabBar = TabBarController()
         guard let tabBar else { return }
         tabBar.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {
