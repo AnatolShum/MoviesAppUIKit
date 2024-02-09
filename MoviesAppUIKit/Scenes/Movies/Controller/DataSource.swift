@@ -14,27 +14,27 @@ extension MoviesController {
             
             switch section {
             case .nowPlaying:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as? MovieCell
                 
-                cell.configureCell(with: item.nowPlaying!)
+                cell?.configureCell(with: item.nowPlaying!)
                 
                 return cell
             case .topRated:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as? MovieCell
                 
-                cell.configureCell(with: item.topRated!)
+                cell?.configureCell(with: item.topRated!)
   
                 return cell
             case .popular:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as? MovieCell
                 
-                cell.configureCell(with: item.popular!)
+                cell?.configureCell(with: item.popular!)
            
                 return cell
             }
         })
         
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
+        dataSource.supplementaryViewProvider = { (collectionView, _, indexPath) -> UICollectionReusableView? in
             let section = self.sections[indexPath.section]
             let sectionName: String
             
@@ -50,8 +50,8 @@ extension MoviesController {
             let headerView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: SupplementaryViewKind.header,
                 withReuseIdentifier: HeaderView.reuseIdentifier,
-                for: indexPath) as! HeaderView
-            headerView.setTitle(sectionName)
+                for: indexPath) as? HeaderView
+            headerView?.setTitle(sectionName)
             
             return headerView
         }

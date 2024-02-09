@@ -28,7 +28,7 @@ class PhotosCell: UICollectionViewCell {
             photoImageView.topAnchor.constraint(equalTo: topAnchor),
             photoImageView.leftAnchor.constraint(equalTo: leftAnchor),
             photoImageView.rightAnchor.constraint(equalTo: rightAnchor),
-            photoImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            photoImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

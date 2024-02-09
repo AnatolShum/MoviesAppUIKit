@@ -22,7 +22,11 @@ extension Network {
             return cache
         }()
         
-        func fetch<Request, Response>(_ argument: Argument, method: Method = .get, body: Request? = nil, then callback: ((Result<Response, Errors>) -> Void)? = nil) where Request: Codable, Response: Codable {
+        func fetch<Request, Response>(
+            _ argument: Argument,
+            method: Method = .get,
+            body: Request? = nil,
+            then callback: ((Result<Response, Errors>) -> Void)? = nil) where Request: Codable, Response: Codable {
             guard let url = argument.url else { return }
             
             var urlRequest = URLRequest(url: url)
@@ -37,7 +41,7 @@ extension Network {
                 }
             }
             
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
                 if let error = error {
                     print(error.localizedDescription)
                     callback?(.failure(.couldNotFetchData))

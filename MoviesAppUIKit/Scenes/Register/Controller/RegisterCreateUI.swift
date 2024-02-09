@@ -62,7 +62,7 @@ extension RegisterController {
             registerButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 15),
             registerButton.leftAnchor.constraint(equalTo: registerView.leftAnchor, constant: 30),
             registerButton.rightAnchor.constraint(equalTo: registerView.rightAnchor, constant: -30),
-            registerButton.bottomAnchor.constraint(equalTo: registerView.bottomAnchor, constant: -15),
+            registerButton.bottomAnchor.constraint(equalTo: registerView.bottomAnchor, constant: -15)
         ])
         
         lineViews.forEach { lineView in

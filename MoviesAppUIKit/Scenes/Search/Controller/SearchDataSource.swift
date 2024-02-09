@@ -11,9 +11,9 @@ import UIKit
 extension SearchController {
     func configureDataSource() {
         dataSource = .init(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as? MovieCell
             
-            cell.configureCell(with: item)
+            cell?.configureCell(with: item)
             
             return cell
         })

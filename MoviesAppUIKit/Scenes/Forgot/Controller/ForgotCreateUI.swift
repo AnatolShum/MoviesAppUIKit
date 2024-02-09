@@ -52,7 +52,7 @@ extension ForgotController {
             forgotButton.bottomAnchor.constraint(equalTo: forgotView.bottomAnchor, constant: -15),
             lineView.heightAnchor.constraint(equalToConstant: 1),
             lineView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-            lineView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            lineView.rightAnchor.constraint(equalTo: stackView.rightAnchor)
         ])
     }
 }

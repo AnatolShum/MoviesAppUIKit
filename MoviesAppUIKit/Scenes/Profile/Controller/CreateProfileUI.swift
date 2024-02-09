@@ -90,7 +90,7 @@ extension ProfileController {
             signOutButton.topAnchor.constraint(greaterThanOrEqualTo: memberSinceVStack.bottomAnchor, constant: 70),
             signOutButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             signOutButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            signOutButton.heightAnchor.constraint(equalToConstant: 44),
+            signOutButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
 }

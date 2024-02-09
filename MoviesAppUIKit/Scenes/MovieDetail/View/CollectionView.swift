@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 extension MovieDetailView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             photos.count
         }
     
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = photosCollectionView.dequeueReusableCell(withReuseIdentifier: PhotosCell.reuseIdentifier, for: indexPath) as! PhotosCell
-    
+            let cell = photosCollectionView.dequeueReusableCell(withReuseIdentifier: PhotosCell.reuseIdentifier, for: indexPath) as? PhotosCell
+            guard let cell else { return UICollectionViewCell() }
+            
             let item = photos[indexPath.item]
             cell.fetchImage(with: item.path)
             

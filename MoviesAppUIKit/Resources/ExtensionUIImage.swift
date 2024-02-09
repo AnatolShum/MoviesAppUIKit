@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import CoreImage
-import CoreImage.CIFilterBuiltins
 
 extension UIImage {
     func averageColor() -> UIColor? {

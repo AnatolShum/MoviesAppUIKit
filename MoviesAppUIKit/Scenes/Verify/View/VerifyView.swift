@@ -102,7 +102,7 @@ class VerifyView: UIView {
             loginButton.bottomAnchor.constraint(equalTo: centerView.bottomAnchor, constant: -15),
             lineView.heightAnchor.constraint(equalToConstant: 1),
             lineView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-            lineView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            lineView.rightAnchor.constraint(equalTo: stackView.rightAnchor)
         ])
     }
     

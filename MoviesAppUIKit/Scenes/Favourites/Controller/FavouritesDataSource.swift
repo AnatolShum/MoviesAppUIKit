@@ -11,10 +11,10 @@ import UIKit
 extension FavouritesController {
     func configureDataSource() {
         dataSource = .init(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as! MovieCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifier, for: indexPath) as? MovieCell
             
-            cell.delegate = self
-            cell.configureCell(with: item)
+            cell?.delegate = self
+            cell?.configureCell(with: item)
             
             return cell
         })

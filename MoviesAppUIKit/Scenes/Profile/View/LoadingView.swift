@@ -49,5 +49,4 @@ class LoadingView: UIViewController {
         vStack.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
    
-
 }

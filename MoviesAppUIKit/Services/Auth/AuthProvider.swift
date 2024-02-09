@@ -37,7 +37,6 @@ internal class AuthProvider: AuthProviderProtocol {
         }
     }
     
-    
     func createUser(email: String, password: String) -> Future<AuthUser?, Error> {
         return Future { promise in
             Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in

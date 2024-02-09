@@ -111,7 +111,7 @@ class VerifyController: UIViewController {
     @objc
     private func updateButton() {
         let button = verifyView?.verifyButton
-        if (counter > 0) {
+        if counter > 0 {
             counter -= 1
             DispatchQueue.main.async {
                 button?.isEnabled = false

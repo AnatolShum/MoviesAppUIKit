@@ -31,6 +31,7 @@
 		3C0EAA2F2B7508DA001AB97E /* VerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA2E2B7508DA001AB97E /* VerifyController.swift */; };
 		3C0EAA312B750905001AB97E /* VerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA302B750905001AB97E /* VerifyView.swift */; };
 		3C0EAA362B751718001AB97E /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EAA352B751717001AB97E /* AlertManager.swift */; };
+		3C0EAA392B7624BA001AB97E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3C0EAA382B7624BA001AB97E /* .swiftlint.yml */; };
 		3C2E3AA12ACB3B7000485702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2E3AA02ACB3B7000485702 /* AppDelegate.swift */; };
 		3C2E3AA32ACB3B7000485702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2E3AA22ACB3B7000485702 /* SceneDelegate.swift */; };
 		3C2E3AA52ACB3B7000485702 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2E3AA42ACB3B7000485702 /* MainController.swift */; };
@@ -148,6 +149,7 @@
 		3C0EAA2E2B7508DA001AB97E /* VerifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyController.swift; sourceTree = "<group>"; };
 		3C0EAA302B750905001AB97E /* VerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyView.swift; sourceTree = "<group>"; };
 		3C0EAA352B751717001AB97E /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		3C0EAA382B7624BA001AB97E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3C2E3A9D2ACB3B7000485702 /* MoviesAppUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesAppUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2E3AA02ACB3B7000485702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C2E3AA22ACB3B7000485702 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 		3C2E3A942ACB3B7000485702 = {
 			isa = PBXGroup;
 			children = (
+				3C0EAA382B7624BA001AB97E /* .swiftlint.yml */,
 				3C2E3A9F2ACB3B7000485702 /* MoviesAppUIKit */,
 				3C2E3AB62ACB3B7100485702 /* MoviesAppUIKitTests */,
 				3C2E3AC02ACB3B7100485702 /* MoviesAppUIKitUITests */,
@@ -781,6 +784,7 @@
 				3C2E3A992ACB3B7000485702 /* Sources */,
 				3C2E3A9A2ACB3B7000485702 /* Frameworks */,
 				3C2E3A9B2ACB3B7000485702 /* Resources */,
+				3C0EAA372B76240A001AB97E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -888,6 +892,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C0EAA392B7624BA001AB97E /* .swiftlint.yml in Resources */,
 				3C2E3AAA2ACB3B7100485702 /* Assets.xcassets in Resources */,
 				3C2E3AE32ACB3CE600485702 /* GoogleService-Info.plist in Resources */,
 			);
@@ -908,6 +913,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3C0EAA372B76240A001AB97E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3C2E3A992ACB3B7000485702 /* Sources */ = {
@@ -1165,6 +1191,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MRF492JZG4;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesAppUIKit/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1192,6 +1219,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MRF492JZG4;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesAppUIKit/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -1,9 +1,7 @@
-
 //  FavouriteManager.swift
 //  MoviesApp
 //
 //  Created by Anatolii Shumov on 11/09/2023.
-
 
 import Foundation
 import FirebaseAuth
@@ -37,7 +35,7 @@ class FavouriteManager: ProtocolFavouriteManager {
                     print(error.localizedDescription)
                 } else {
                     let exist = querySnapshot!.documents.first { document in
-                        movieID == document.data().filter({ $0.key == "movieID" }).values.first as! Int
+                        movieID == document.data().filter({ $0.key == "movieID" }).values.first as? Int
                     }
                     if exist != nil {
                         self.delegate?.isFavourite = true
@@ -61,11 +59,11 @@ class FavouriteManager: ProtocolFavouriteManager {
                     print(error.localizedDescription)
                 } else {
                     let exist = querySnapshot!.documents.first { document in
-                        movieID == document.data().filter({ $0.key == "movieID" }).values.first as! Int
+                        movieID == document.data().filter({ $0.key == "movieID" }).values.first as? Int
                     }
                     if exist != nil {
                         if let dbID = exist?.data().filter({ $0.key == "id" }).values.first {
-                            self.deleteMovie(dbID: dbID as! String, userID: userID)
+                            self.deleteMovie(dbID: dbID as? String ?? "", userID: userID)
                         }
                     } else {
                         self.addMovie(movieID: movieID, userID: userID)

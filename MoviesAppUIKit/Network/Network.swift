@@ -8,11 +8,8 @@
 import Foundation
 
 class Network {
-    
     enum Method: String {
         case get
         case post
     }
- 
 }
-

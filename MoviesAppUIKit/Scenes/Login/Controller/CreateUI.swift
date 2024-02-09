@@ -70,7 +70,7 @@ extension LoginController {
             loginButton.rightAnchor.constraint(equalTo: loginView.rightAnchor, constant: -30),
             loginButton.bottomAnchor.constraint(equalTo: loginView.bottomAnchor, constant: -15),
             createAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            createAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
         
         lineViews.forEach { lineView in

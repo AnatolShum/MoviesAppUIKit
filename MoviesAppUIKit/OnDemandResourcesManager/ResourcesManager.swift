@@ -14,7 +14,9 @@ final class ResourcesManager {
     
     private func loadResources(completion: @escaping (NSBundleResourceRequest?, Error?) -> Void) {
         let tags = NSSet(array: tags)
-        let resourcesRequest: NSBundleResourceRequest = NSBundleResourceRequest(tags: tags as! Set<String>)
+        let tagsAsSet = tags as? Set<String>
+        guard let tagsAsSet else { return }
+        let resourcesRequest: NSBundleResourceRequest = NSBundleResourceRequest(tags: tagsAsSet)
         
         resourcesRequest.conditionallyBeginAccessingResources { resourcesAvailable in
             if resourcesAvailable {
@@ -34,7 +36,7 @@ final class ResourcesManager {
     
     typealias ApiKey = String?
     func getKey() -> ApiKey {
-        var key: String? = nil
+        var key: String?
         
         keyGroup.enter()
         loadResources { [weak self] odr, error in

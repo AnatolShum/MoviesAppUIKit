@@ -39,12 +39,10 @@ extension FullScreenImageController {
     
     private func getImageIndex(path: String?, paths: [Photos]) {
         guard let path = path else { return }
-        for (index, element) in paths.enumerated() {
-            if element.path == path {
-                DispatchQueue.main.async {
-                    self.photoIndex = index + 1
-                    self.changeCurrentImageTitle()
-                }
+        for (index, element) in paths.enumerated() where element.path == path {
+            DispatchQueue.main.async {
+                self.photoIndex = index + 1
+                self.changeCurrentImageTitle()
             }
         }
     }

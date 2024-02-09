@@ -29,8 +29,15 @@ class MoviesController: UICollectionViewController {
         
         collectionView.backgroundView = colorView
         collectionView.collectionViewLayout = createLayout()
-        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifier)
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: SupplementaryViewKind.header, withReuseIdentifier: HeaderView.reuseIdentifier)
+        collectionView.register(
+            MovieCell.self,
+            forCellWithReuseIdentifier: MovieCell.reuseIdentifier
+        )
+        collectionView.register(
+            HeaderView.self,
+            forSupplementaryViewOfKind: SupplementaryViewKind.header,
+            withReuseIdentifier: HeaderView.reuseIdentifier
+        )
         configureDataSource()
     }
     

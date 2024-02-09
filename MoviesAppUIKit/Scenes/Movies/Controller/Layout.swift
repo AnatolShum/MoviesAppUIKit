@@ -10,8 +10,7 @@ import UIKit
 
 extension MoviesController {
     func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
             let section = self.sections[sectionIndex]
             
             let headerItemSize = NSCollectionLayoutSize(

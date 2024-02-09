@@ -9,7 +9,7 @@ import UIKit
 import YouTubeiOSPlayerHelper
 
 class PlayerController: UIViewController, YTPlayerViewDelegate {
-    let key : String
+    let key: String
     
     private lazy var player: YTPlayerView = {
         return YTPlayerView()
@@ -35,7 +35,7 @@ class PlayerController: UIViewController, YTPlayerViewDelegate {
             player.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             player.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             player.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            player.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            player.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         player.load(withVideoId: key)
     }

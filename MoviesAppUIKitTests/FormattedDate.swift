@@ -20,7 +20,7 @@ final class FormattedDate: XCTestCase {
         backdrop: "/7I6VUdPj6tQECNHdviJkUHD2u89.jpg",
         poster: "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
         releaseDate: "2023-03-22",
-        overview: "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+        overview: "With the price on his head ever increasing, ...",
         vote: 7.8)
     }
 

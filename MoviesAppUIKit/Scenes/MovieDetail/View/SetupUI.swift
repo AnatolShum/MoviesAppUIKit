@@ -31,7 +31,6 @@ extension MovieDetailView {
         
         scrollView.addSubview(photosCollectionView)
         
-        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.leftAnchor.constraint(equalTo: leftAnchor),
@@ -57,7 +56,7 @@ extension MovieDetailView {
             photosCollectionView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15),
             photosCollectionView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15),
             photosCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
-            photosCollectionView.heightAnchor.constraint(equalToConstant: 100),
+            photosCollectionView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 }

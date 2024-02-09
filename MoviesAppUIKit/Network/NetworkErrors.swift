@@ -8,7 +8,6 @@
 import Foundation
 
 extension Network {
-    
     enum Errors: Error, LocalizedError {
         case urlNotFound
         case responseError
