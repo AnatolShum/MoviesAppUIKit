@@ -6,14 +6,14 @@
 //
 
 import UIKit
-import FirebaseFirestore
 import Combine
 
 class RegisterController: UIViewController {
     private var titleView: TitleView?
     private var mainController: MainController?
     private var authService: AuthService?
-    private var observer: AnyCancellable?
+    private var firestoreService: FirestoreService?
+    private var observers: [AnyCancellable] = []
     private var alertManager: AlertManager?
     var nameTextField: UITextField!
     var emailTextField: UITextField!
@@ -55,7 +55,7 @@ class RegisterController: UIViewController {
         guard validate() else { return }
         
         authService = AuthService()
-        observer = authService?.createUser(email: email, password: password)
+        authService?.createUser(email: email, password: password)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let strongSelf = self else { return }
@@ -74,16 +74,24 @@ class RegisterController: UIViewController {
                     return }
                 strongSelf.saveUserRecord(id: id)
             })
+            .store(in: &observers)
     }
     
     private func saveUserRecord(id: String) {
         let newUser = User(id: id, name: userName, email: email, joined: Date().timeIntervalSince1970)
-        let db = Firestore.firestore()
-        db.collection("users")
-            .document(id)
-            .setData(newUser.asDictionary())
-        
-        presentMain()
+        firestoreService = FirestoreService()
+        firestoreService?.setUser(user: newUser)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let strongSelf = self else { return }
+                switch completion {
+                case .finished:
+                    strongSelf.presentMain()
+                case .failure(let error):
+                    strongSelf.alertManager = AlertManager(strongSelf)
+                    strongSelf.alertManager?.displayError(error.localizedDescription)
+                }
+            }, receiveValue: {})
+            .store(in: &observers)
     }
     
     private func validate() -> Bool {

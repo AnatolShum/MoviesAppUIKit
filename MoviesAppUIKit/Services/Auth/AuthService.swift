@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 class AuthService: AuthProviderProtocol {
-    
     private let provider: AuthProviderProtocol
     
     init() {

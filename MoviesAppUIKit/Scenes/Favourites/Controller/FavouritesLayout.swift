@@ -36,7 +36,6 @@ extension FavouritesController {
             count: subitems)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .none
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: sideInset, bottom: 0, trailing: sideInset)
         
         let layout = UICollectionViewCompositionalLayout(section: section)

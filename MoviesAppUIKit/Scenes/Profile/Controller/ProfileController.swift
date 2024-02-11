@@ -6,12 +6,12 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
+import Combine
 
 class ProfileController: UIViewController {
     let colorView = ColorView()
     var loadingView: LoadingView!
+    var mainController: MainController!
     let profileImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "person.circle")
@@ -26,7 +26,10 @@ class ProfileController: UIViewController {
     var emailLabel: UILabel!
     var memberSinceLabel: UILabel!
     
-    var mainController: MainController!
+    private var subscribers: [AnyCancellable] = []
+    private var firestoreService: FirestoreService?
+    private var authService: AuthService?
+    private var alertManager: AlertManager?
     
     override func loadView() {
         super.loadView()
@@ -50,23 +53,23 @@ class ProfileController: UIViewController {
     }
     
     private func fetchUser() {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        
-        let db = Firestore.firestore()
-        db.collection("users")
-            .document(userID)
-            .getDocument { [weak self] snapshot, error in
-                guard let data = snapshot?.data(), error == nil else { return }
-                
-                DispatchQueue.main.async {
-                    let user = User(id: data["id"] as? String ?? "",
-                                    name: data["name"] as? String ?? "",
-                                    email: data["email"] as? String ?? "",
-                                    joined: data["joined"] as? TimeInterval ?? 0)
-                    self?.setLabelData(user)
-                    self?.stopShowingLoadingView()
+        firestoreService = FirestoreService()
+        firestoreService?.getUser()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let strongSelf = self else { return }
+                switch completion {
+                case .finished:
+                    strongSelf.stopShowingLoadingView()
+                case .failure(let error):
+                    strongSelf.alertManager = AlertManager(strongSelf)
+                    strongSelf.alertManager?.displayError(error.localizedDescription)
                 }
-            }
+            }, receiveValue: { [weak self] user in
+                guard let strongSelf = self else { return }
+                strongSelf.setLabelData(user)
+            })
+            .store(in: &subscribers)
     }
     
     private func setLabelData(_ user: User) {
@@ -76,13 +79,20 @@ class ProfileController: UIViewController {
     }
     
     @objc func signOutButtonTapped() {
-        do {
-            try Auth.auth().signOut()
-            presentMainController()
-            deleteItems()
-        } catch {
-            print(error.localizedDescription)
-        }
+        authService = AuthService()
+        authService?.signOut()
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let strongSelf = self else { return }
+                switch completion {
+                case .finished:
+                    strongSelf.presentMainController()
+                    strongSelf.deleteItems()
+                case .failure(let error):
+                    strongSelf.alertManager = AlertManager(strongSelf)
+                    strongSelf.alertManager?.displayError(error.localizedDescription)
+                }
+            }, receiveValue: {})
+            .store(in: &subscribers)
     }
 
     private func presentMainController() {

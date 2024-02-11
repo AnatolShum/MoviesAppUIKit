@@ -10,3 +10,9 @@ import Foundation
 protocol ProtocolIsFavourites: AnyObject {
     var isFavourite: Bool { get set }
 }
+
+protocol ProtocolFavouriteManager: AnyObject {
+    var delegate: ProtocolIsFavourites? { get set }
+    func checkFavourite()
+    func toggleFavourites()
+}

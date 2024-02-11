@@ -6,11 +6,13 @@
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseFirestoreSwift
+import Combine
 
 class FavouritesController: UICollectionViewController {
     private var authService: AuthService?
+    private var firestoreService: FirestoreService?
+    private var subscriber: AnyCancellable?
+    var alertManager: AlertManager?
     private var userID: String?
     let colorView = ColorView()
     var movies: [Movie] = []
@@ -51,6 +53,11 @@ class FavouritesController: UICollectionViewController {
         super.viewDidLayoutSubviews()
         
         colorView.gradientLayer.frame = colorView.bounds
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
         DispatchQueue.main.async {
             self.collectionView.setCollectionViewLayout(self.createLayout(), animated: false)
         }
@@ -67,24 +74,22 @@ class FavouritesController: UICollectionViewController {
     
     func getFavourites() {
         guard let userID = userID else { return }
-        var favourites: [Favourite] = []
-        let db = Firestore.firestore()
-        db.collection("users")
-            .document(userID)
-            .collection("favourites")
-            .getDocuments { [weak self] snapshot, error in
-                guard let self = self else { return }
-                guard let documents = snapshot?.documents else { return}
-                documents.forEach { document in
-                    let data = document.data()
-                    let favourite = Favourite(
-                        id: data["id"] as? String ?? "",
-                        movieID: data["movieID"] as? Int ?? 0)
-                    favourites.append(favourite)
+        firestoreService = FirestoreService()
+        subscriber = firestoreService?.getFafourites()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let strongSelf = self else { return }
+                switch completion {
+                case .finished:
+                    strongSelf.movies = []
+                case .failure(let error):
+                    strongSelf.alertManager = AlertManager(strongSelf)
+                    strongSelf.alertManager?.displayError(error.localizedDescription)
                 }
-                
-                self.fetchFavourites(favourites)
-            }
+            }, receiveValue: { [weak self] favourites in
+                guard let strongSelf = self else { return }
+                strongSelf.fetchFavourites(favourites)
+            })
     }
     
 }
