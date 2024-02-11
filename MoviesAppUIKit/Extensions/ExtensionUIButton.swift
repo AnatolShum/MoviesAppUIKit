@@ -6,21 +6,18 @@
 //
 
 import Foundation
-import ObjectiveC
 import UIKit
 
 extension UIButton {
-    private struct AssociatedKeys {
-        static var textKey = "textKey"
-    }
-    
-    var text: String? {
+    public var text: String? {
         get {
-            return objc_getAssociatedObject(self, AssociatedKeys.textKey) as? String
+            return self.titleLabel?.text
         }
         set {
-            objc_setAssociatedObject(self, AssociatedKeys.textKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             self.setTitle(newValue, for: .normal)
+            self.setTitle(newValue, for: .selected)
+            self.setTitle(newValue, for: .disabled)
+            self.setTitle(newValue, for: .highlighted)
         }
     }
 }
