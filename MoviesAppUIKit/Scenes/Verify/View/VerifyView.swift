@@ -106,19 +106,20 @@ class VerifyView: UIView {
         ])
     }
     
-    func configureView(with email: String) {
+    func configureView(with email: String?) {
+        let email = email ?? "unknown email"
         let text = sentInfo + "\n" + email + "\n" + verifyInfo
         informationTitle.text = text
     }
     
     @objc
     private func loginButtonAction() {
-        loginAction.send(())
+        loginAction.send()
     }
     
     @objc
     private func sendVerificationAction() {
-        verifyAction.send(())
+        verifyAction.send()
     }
     
 }

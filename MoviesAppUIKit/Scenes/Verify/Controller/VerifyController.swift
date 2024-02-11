@@ -15,9 +15,16 @@ class VerifyController: UIViewController {
     private var loginNavigationController: UINavigationController?
     private var authService: AuthService?
     private var alertManager: AlertManager?
-    private var observers: [AnyCancellable] = []
+    private var subscribers: [AnyCancellable] = []
     private var counter = 60
     private var timer = Timer()
+    @Published private var isButtonEnable: Bool = false
+    @Published private var buttonBackgroundColor: UIColor? = ButtonColors.disable
+    @Published private var buttonTitle: String? = "Resend after 60 seconds"
+    private enum ButtonColors {
+        static let disable = UIColor.black.withAlphaComponent(0.3)
+        static let enable = UIColor.systemIndigo
+    }
     
     override func loadView() {
         super.loadView()
@@ -25,7 +32,7 @@ class VerifyController: UIViewController {
         authService = AuthService()
         let email = authService?.currentUser?.email
         verifyView = VerifyView(frame: view.bounds)
-        verifyView?.configureView(with: email ?? "unknown email")
+        verifyView?.configureView(with: email)
         view = verifyView
     }
     
@@ -34,6 +41,7 @@ class VerifyController: UIViewController {
         
         receiveLoginAction()
         receiveVerifyAction()
+        subscribe()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,13 +50,33 @@ class VerifyController: UIViewController {
         sendEmailVerification()
     }
     
+    private func subscribe() {
+        let button = verifyView?.verifyButton
+        guard let button else { return }
+        
+        $isButtonEnable
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isEnabled, on: button)
+            .store(in: &subscribers)
+        
+        $buttonBackgroundColor
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.backgroundColor, on: button)
+            .store(in: &subscribers)
+        
+        $buttonTitle
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.text, on: button)
+            .store(in: &subscribers)
+    }
+    
     private func receiveLoginAction() {
         verifyView?.loginAction
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
                 guard let strongSelf = self else { return }
                 strongSelf.signOut()
-            }).store(in: &observers)
+            }).store(in: &subscribers)
     }
     
     private func receiveVerifyAction() {
@@ -57,7 +85,7 @@ class VerifyController: UIViewController {
             .sink(receiveValue: { [weak self] _ in
                 guard let strongSelf = self else { return }
                 strongSelf.sendEmailVerification()
-            }).store(in: &observers)
+            }).store(in: &subscribers)
     }
     
     private func signOut() {
@@ -72,7 +100,7 @@ class VerifyController: UIViewController {
                     strongSelf.alertManager?.displayError(error.localizedDescription)
                 }
             }, receiveValue: {})
-            .store(in: &observers)
+            .store(in: &subscribers)
     }
     
     private func sendEmailVerification() {
@@ -87,7 +115,7 @@ class VerifyController: UIViewController {
                     strongSelf.alertManager?.displayError(error.localizedDescription)
                 }
             }, receiveValue: {})
-            .store(in: &observers)
+            .store(in: &subscribers)
     }
     
     private func presentLoginView() {
@@ -110,22 +138,17 @@ class VerifyController: UIViewController {
     
     @objc
     private func updateButton() {
-        let button = verifyView?.verifyButton
         if counter > 0 {
             counter -= 1
-            DispatchQueue.main.async {
-                button?.isEnabled = false
-                button?.backgroundColor = .black.withAlphaComponent(0.3)
-                button?.setTitle("Resend after \(self.counter) seconds", for: .normal)
-            }
+            isButtonEnable = false
+            buttonBackgroundColor = ButtonColors.disable
+            buttonTitle = "Resend after \(self.counter) seconds"
         } else {
-            DispatchQueue.main.async {
-                button?.isEnabled = true
-                button?.backgroundColor = .systemIndigo
-                button?.setTitle("Send email verification", for: .normal)
-                self.timer.invalidate()
-                self.counter = 60
-            }
+            isButtonEnable = true
+            buttonBackgroundColor = ButtonColors.enable
+            buttonTitle = "Send email verification"
+            timer.invalidate()
+            counter = 60
         }
     }
     
