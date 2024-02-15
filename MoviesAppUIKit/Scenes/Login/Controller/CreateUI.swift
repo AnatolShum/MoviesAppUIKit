@@ -82,13 +82,7 @@ extension LoginController {
     
     typealias LineViews = [UIView]
     private func makeLineViews(_ views: [UIView]) -> LineViews {
-        var lineViews: [UIView] = []
-        for _ in 1...views.count {
-            let line = LineView()
-            lineViews.append(line)
-        }
-        
-        return lineViews
+        return views.map { _ in LineView() }
     }
     
 }

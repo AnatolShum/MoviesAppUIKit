@@ -72,7 +72,6 @@ class FirestoreProvider: FirestoreProviderProtocol {
         let authService = AuthService()
         let user = authService.currentUser
         guard let userID = user?.id else { return }
-        var favourites: [Favourite] = []
         let db = Firestore.firestore()
         db.collection("users")
             .document(userID)
@@ -81,17 +80,17 @@ class FirestoreProvider: FirestoreProviderProtocol {
                 if let error {
                     completion(.failure(error))
                 }
-                if let documents = querySnapshot?.documents {
-                    documents.forEach { document in
-                        let data = document.data()
-                        let favourite = Favourite(
-                            id: data["id"] as? String ?? "",
-                            movieID: data["movieID"] as? Int ?? 0
-                        )
-                        favourites.append(favourite)
-                    }
-                    completion(.success(favourites))
+                
+                guard let documents = querySnapshot?.documents else { return }
+                let favourites = documents.map { document in
+                    let data = document.data()
+                    let favourite = Favourite(
+                        id: data["id"] as? String ?? "",
+                        movieID: data["movieID"] as? Int ?? 0
+                    )
+                    return favourite
                 }
+                completion(.success(favourites))
             }
     }
     
